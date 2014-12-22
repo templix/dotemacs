@@ -1,0 +1,344 @@
+;;
+;;;;;;;; CONTINUACIÓN DE .emacs ;;;;;;;;;;;;;;;;;;;
+;;
+;;;;;; skeleton:
+(define-skeleton logo
+  "Cabecera (C-c l)"
+  "logo: "
+  ";;                   ___ _ __ ___   __ _  ___ ___                  \n"
+  ";;                  / _ \\ '_ ` _ \\ / _` |/ __/ __|                 \n"
+  ";;                 |  __/ | | | | | (_| | (__\\__ \\                 \n"
+  ";;                (_)___|_| |_| |_|\\__,_|\\___|___/                 \n"
+  ";;                               .-.                               \n"
+  ";; =--------------------------   /v\\  ----------------------------=\n"
+  ";; = lapipaplena.org            // \\\\              templix@gmx.es =\n"
+  ";; =-----------------          /(   )\\        --------------------=\n"
+  ";; =                            ^^-^^                             =\n"
+  ";; =         https://tractatuslapipaplena.herokuapp.com/          =\n"
+  ";; =--------------------------------------------------------------=\n")
+;
+;
+;;;;;; skeleton per a latex:
+(define-skeleton dialeg
+  "Per els diàlegs dels personatges(C-c d)"
+  "dialeg: "
+  "\\begin{quote}\n"
+  "  \\textsl{ }\n"
+  "\n "
+  "\\end{quote}\n")
+;;;
+(define-skeleton quadre
+  "Quadres d'opcións(C-c q)"
+  "quadre: "
+  "\\begin{table}[htb]\n"
+  "\\centering\n"
+  "\\begin{tabular}{||l | c || c | l ||}\n"
+  "\\hline\n"
+  "\n "
+  "\\hline\n"
+  "\\end{tabular}\n"
+  "\\caption{   }\n"
+  "\\end{table}\n")
+;;;
+(define-skeleton argument
+  "L'argument general(C-c z)"
+  "argument: "
+  "\\vspace{15mm}\n"
+  "\\hline\n"
+  "\n "
+  "\\hline\n"
+  "\\begin{center}\n"
+  "\\Ovalbox{\\large\\bf ...}\n"
+  "\\end{center}\n")
+;;;
+(define-skeleton plantilla
+	"Plantilla encapçalament latex (C-c u)"
+	"Plantilla: "
+"\\documentclass[a4paper,openright,oneside,12pt]{book}\n"
+"\\usepackage{geometry}\n"
+"\\usepackage{url}\n"
+"\\usepackage[spanish]{babel}\n"
+"\\usepackage[T1]{fontenc}\n"
+"\\usepackage{textcomp}\n"
+"\\usepackage[utf8]{inputenc}\n"
+"\\usepackage{fancybox}\n"
+"\\usepackage{framed}\n"
+"\\usepackage{wedn}\n"
+"\\usepackage{utopia}\n"
+"\\usepackage{pbsi}\n"
+"\\usepackage{suetterl}\n"
+"\\usepackage{verbatim}\n"
+"\\usepackage{url}\n"
+"\\usepackage{setspace}\n"
+"\\usepackage[framemethod=tikz]{mdframed}\n"
+"\\usepackage{incgraph}\n"
+"\\usepackage{xcolor}\n"
+"\\usepackage{colortbl}\n"
+"\\usepackage{multirow}\n"
+"\\usepackage{wrapfig}\n"
+"\\usepackage{fancyvrb}\n"
+"\\usepackage{lipsum}\n"
+"\\usepackage{fullpage}\n"
+"\\usepackage{listings}\n"
+"\\usepackage{graphicx}\n"
+"\\usepackage{parskip}\n"
+"\\textheight=25cm\n"
+"\\textwidth=18cm\n"
+"\\oddsidemargin=-1cm\n"
+"\\topmargin=-1cm\n"
+"\n"
+"\\begin{document}\n"
+"\n"
+"\n"
+"\n"
+"\\end{document}\n")
+;
+;
+;;;;; Posar el cursor sobre una URL d'un text i obrir-la al firefox (funció)
+;; La drecera de teclat és C-c b
+(defun w3mext-open-link-or-image-or-url ()
+;    "Opens the current link or image or current page's uri or any
+;url-like text under cursor in firefox."
+    (interactive)
+    (let (url)
+      (if (string= major-mode "w3m-mode")
+	          (setq url (or (w3m-anchor) (w3m-image)
+				w3m-current-url)))
+          (browse-url-firefox (if url url (car
+					   (browse-url-interactive-arg
+					    "URL: "))))
+	  ))
+;
+;
+;;;;; Abrir archivos o directorios de forma rápida (C-c x).
+(require 'ido)
+(defvar xah-filelist nil "Lista de archivos o directorios que permite
+abrirlos de forma rápida.")
+(setq xah-filelist
+      '(
+        ("baixades" . "~/Baixades" )
+        ("backups" . "/media/dades/arxius_importants/" )
+        ("tractatus" . "~/tractatus/tractatus.txt" )
+        ;; more here
+        ) )
+;
+(defun xah-open-file-fast (openCode)
+  "Función para abrir el archivo o directorio predefinido"
+  (interactive
+   (list (ido-completing-read "Open:" (mapcar (lambda (x) (car x))
+					      xah-filelist)))
+   )
+  (find-file (cdr (assoc openCode xah-filelist))))
+;
+;
+;;;;; Reabrir algún buffer cerrado anteriormente
+;; La drecera de teclat és C-c 2
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-saved-items 200
+(setq recentf-max-menu-items 25)
+(recentf-mode)
+;; Limpiar listado al inicio si se visitan remotos:
+; (setq recentf-auto-cleanup 'never)
+;
+;
+;;;;; Crear backup del buffer abierto. El nombre será del tipo:
+;;;;; nombre~<date>~ en el mismo directorio. Si existe, se sobreescribe
+;; La drecerqa de teclat és: C-c v
+(defun crear-backup ()
+  (interactive)
+  (if (buffer-file-name)
+      (let* ((currentName (buffer-file-name))
+             (backupName (concat currentName "-" (format-time-string
+                                                  "%Y%m%d_%M%S")
+				  ".old")))
+        (copy-file currentName backupName t)
+        (message (concat "El backup se guarda con el nombre: " (file-name-nondirectory
+					      backupName))))
+    (user-error "El buffer no es un archivo.")
+    ))
+;
+;
+;;;;; Copiar la ruta del archivo del presente buffer (Pegarla con C-x y):
+(defun copy-file-path (&optional φdir-path-only-p)
+  "Copy the current buffer's file path or dired path to `kill-ring'.
+If `universal-argument' is called, copy only the dir path."
+  (interactive "P")
+  (let ((fPath
+         (if (equal major-mode 'dired-mode)
+             default-directory
+           (buffer-file-name))))
+    (kill-new
+     (if (equal φdir-path-only-p nil)
+         fPath
+       (file-name-directory fPath))))
+  (message "Ruta del archivo copiada."))
+;
+;
+;;;;;; Varias funciones para pasar buffers a pdf.
+(defun pdf-save-buffer (quiet filename)
+    "Save buffer as a pdf file.
+With prefix arg (C-u), display of output is suppressed.
+'quiet' is set by the prefix argument
+'filename' is interactively prompted"
+    (interactive "P\nGGuardar como: ")
+    (if (file-directory-p filename)
+	(setq filename (concat (buffer-name) ".pdf")))
+    (if (get-buffer "*PostScript*") (kill-buffer "*PostScript*"))
+    (ps-spool-buffer)
+    (set-buffer "*PostScript*")
+    (shell-command-on-region 1 (point-max)
+			     (format "ps2pdf - %s" filename))
+    (if (not quiet) (find-file filename))
+    )
+;
+(defun pdf-save-buffer-with-faces (quiet filename)
+    "Save buffer as a pdf file with faces.
+With prefix arg (C-u), display of output is suppressed.
+'quiet' is set by the prefix argument
+'filename' is interactively prompted"
+    (interactive "P\nGGuardar como: ")
+    (if (file-directory-p filename)
+	(setq filename (concat (buffer-name) ".pdf")))
+    (if (get-buffer "*PostScript*") (kill-buffer "*PostScript*"))
+    (ps-spool-buffer-with-faces)
+    (set-buffer "*PostScript*")
+    (shell-command-on-region 1 (point-max)
+			     (format "ps2pdf - %s" filename))
+    (if (not quiet) (find-file filename))
+    )
+;
+(defun pdf-save-region (quiet filename start end)
+    "Save region as a pdf file.
+With prefix arg (C-u), display of output is suppressed.
+'quiet' is set by the prefix argument
+'filename' is interactively prompted"
+    (interactive "P\nGGuardar como: \nr")
+    (if (file-directory-p filename)
+	(setq filename (concat (buffer-name) ".pdf")))
+    (if (get-buffer "*PostScript*") (kill-buffer "*PostScript*"))
+    (ps-spool-region start end)
+    (set-buffer "*PostScript*")
+    (shell-command-on-region 1 (point-max)
+			     (format "ps2pdf - %s" filename))
+    (if (not quiet) (find-file filename))
+    )
+;
+(defun pdf-save-region-with-faces (quiet filename start end)
+    "Save region as a pdf file with faces.
+With prefix arg (C-u), display of output is suppressed.
+'quiet' is set by the prefix argument
+'filename' is interactively prompted"
+    (interactive "P\nGGuardar como: \nr")
+    (if (file-directory-p filename)
+	(setq filename (concat (buffer-name) ".pdf")))
+    (if (get-buffer "*PostScript*") (kill-buffer "*PostScript*"))
+    (ps-spool-region-with-faces start end)
+    (set-buffer "*PostScript*")
+    (shell-command-on-region 1 (point-max)
+			     (format "ps2pdf - %s" filename))
+    (if (not quiet) (find-file filename))
+    )
+;
+;
+;;; Función para insertar la fecha:
+(defun insert-date ()
+  "Inserta dia semana, fecha dd-mm-yyyy y hora, minutos y segundos"
+  (interactive)
+  (when (use-region-p)
+    (delete-region (region-beginning) (region-end) )
+    )
+  (insert (format-time-string "%a-%x--%A"))
+  )
+;
+;
+;;; Función para copiar una linea al portapapeles:
+(defun copy-line (arg)
+  "Copiar linea al portapapeles"
+  (interactive "p")
+  (kill-ring-save (line-beginning-position)
+		  (line-beginning-position (+ 1 arg)))
+  (message "%d line%s copied" arg (if (= 1 arg) "" "s")))
+;
+;
+;;;; Activar tomar descansos cada determinado periodo de tiempo:
+;;   type-break-mode activa/desactiva la extensión
+(require 'type-break)
+;; Frecuencia para tomar descansos en segundos (1 hora) :
+(setq type-break-interval (* 60 60))
+;; Para cada frecuencia anterior parar 5 minutos:
+(setq type-break-good-rest-interval (* 60 5))
+;
+;
+;;;;;;;;;;;;;;;;; PROVES A PARTIR D'AQUÍ;;;;;;;;;;;;;;;
+;
+;
+;;; muse
+;; (custom-set-variables
+;;  ;; custom-set-variables was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(muse-file-extension "muse")
+;;  '(muse-html-charset-default "utf-8")
+;;  '(muse-html-encoding-default (quote utf-8))
+;;  '(muse-html-meta-content-encoding (quote utf-8))
+;;  '(muse-ignored-extensions
+;;    (quote
+;;     ("bz2" "gz" "[Zz]" "rej" "orig" "png" "hgignore" "gif" "css" "jpg" "html" "sh" "lftp" "pdf")))
+;;  '(muse-mode-auto-p nil)
+;;  '(muse-wiki-allow-nonexistent-wikiword nil)
+;;  '(muse-wiki-use-wikiword nil))
+
+
+;; (add-to-list 'load-path "~/.emacs.d/elpa/muse-3.20")
+;; (require 'muse-mode) ; carga el modo de autor
+;; (require 'muse-html) ; carga los estilos de publicación
+;; (require 'muse-latex)
+;; (require 'muse-texinfo)
+;; (require 'muse-docbook)
+;; (require 'muse-project) ; publica los ficheros de los proyectos
+;; ;;;;;;;;
+;; (setq muse-project-alist
+;;       '(("tux" ("~/pagines" :default "index")
+;; 	 (:base "html" :path "~/pagines/html")
+;; 	 (:base "pdf" :path "~/pagines/pdf"))))
+;; '(muse-wikipedia-country "es")
+;; (add-to-list 'auto-mode-alist '("\\.muse$" . muse-mode))
+;; (custom-set-variables
+;;  '(muse-html-encoding-default (quote utf-8))
+;;  '(muse-html-meta-content-encoding (quote utf-8))
+;;  '(muse-html-charset-default "utf-8")
+;;  '(muse-file-extension "muse")
+;;  '(muse-mode-auto-p nil)
+;;  '(muse-wiki-allow-nonexistent-wikiword nil)
+;;  '(muse-wiki-use-wikiword nil)
+;;  '(muse-ignored-extensions (quote ("bz2" "gz" "[Zz]" "rej" "orig" "png" "hgignore" "gif"
+;; 				   "css" "jpg" "html" "sh" "lftp" "pdf")))
+;;  )
+;
+;
+;;;;; Proves impresores:
+;; '(lpr-add-switches nil)
+;; (setq lpr-command "lp")
+;; (setq lpr-lp-system t)
+;; (setq printer-name "HP_psc_1100_series")
+;; '(lpr-printer-switch "-d")
+;; (custom-set-variables
+;; '(pr-txt-printer-alist
+;;   (quote
+;;    ((default "lp" nil "HP_psc_1100_series")
+;;     (nil "" nil nil))))
+;; )
+;
+;
+;
+ ;; '(pr-ps-printer-alist (quote ((default "lp" nil "-d" "HP_psc_1100_series"))))
+ ;; '(pr-txt-printer-alist
+ ;;   (quote
+ ;;    ((default "lp" nil "-d" "HP_psc_1100_series")
+ ;;     (nil "" nil nil))))
+;;;;;;;
+;
+
+;
