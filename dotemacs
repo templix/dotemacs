@@ -229,7 +229,7 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;;;;;;;;;;;; Ajustaments a les extensions ;;;;;;;;;;;;
 ;
 ;
-;;; blog de notas.
+;;; blog de notes.
 ;;; LLançar amb M-x remember (o F9). C-c C-c per posar data i hora
 ;;; Crea l'arxiu ~/.notes amb totes les notes que anem posant.
 ;;; cd ~/.emacs.d
@@ -402,7 +402,7 @@ w3m-cookie-accept-bad-cookies t)
 (provide 'wget-extension)
 ;
 ;
-;;; Modo latex
+;;;;;; Modo latex
 ;; Que quant es carregui el mode major LaTeX s'activi automàticament reftex.
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 ;; Que AUCTEX delegui a RefTEX lo relatiu a la generació d'etiquetes.
