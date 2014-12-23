@@ -246,15 +246,6 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 (setq multi-term-program "/bin/bash")   ;; use bash
 ;
 ;
-;;; Insertar data y hora amb M-x insert-date
-(defun insert-date ()
-  "Insertar la data en format: dia_setmana,dd-mm-yyyy--hora:minuts:segons"
-  (interactive)
-  (when (use-region-p)
-    (delete-region (region-beginning) (region-end)))
-  (insert (format-time-string "%A,%d-%m-%Y--%T")))
-;
-;
 ;;; package.el (emacs24)
 ;;; (http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el)
 ;;; Paquets llestos per a instal·lar (tipus apt-get). M-x package-list-packages (update) M-x list-packages (llistar)
@@ -339,40 +330,32 @@ w3m-cookie-accept-bad-cookies t)
 ;(color-theme-jsc-dark)
 ;
 ;
-;;; Apps externes:
-;;; En dired, Per arrancar apps externes clicant F8 o M-x external-app:
-(defun external-app ()
- "Abrir archivo con apps externas."
-  (interactive)
-  (let* ((file (dired-get-filename nil t)))
-    (call-process "xdg-open" nil 0 nil file)))
-;;; Obrir carpeta amb "M-x open-dir":
-(defun open-dir ()
-  "Show current dir"
-  (interactive)
-  (cond ((let ((process-connection-type nil)) (start-process "" nil "nautilus" ".")))))
+;;;;; Reabrir algún buffer cerrado anteriormente
+;; La drecera de teclat és C-c 2
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-saved-items 200
+(setq recentf-max-menu-items 25)
+(recentf-mode)
+;; Limpiar listado al inicio si se visitan remotos:
+; (setq recentf-auto-cleanup 'never)
+;
+;
+;;;; Activar tomar descansos cada determinado periodo de tiempo:
+;;   type-break-mode activa/desactiva la extensión
+(require 'type-break)
+;; Frecuencia para tomar descansos en segundos (1 hora) :
+(setq type-break-interval (* 60 60))
+;; Para cada frecuencia anterior parar 5 minutos:
+(setq type-break-good-rest-interval (* 60 5))
+;
+;
+
 ;;; Obrir amb apps externes amb "intro" (~/.emacs.d/openwith.el)
 (require 'openwith)
 (openwith-mode t)
 (require 'mm-util)
 (add-to-list 'mm-inhibit-file-name-handlers 'openwith-file-handler)
-;
-;
-;;; Copi/paste emacs --> X i X --> emacs
-;; http://hugoheden.wordpress.com/2009/03/08/copypaste-with-emacs-in-terminal/
-(setq x-select-enable-clipboard t)
-(unless window-system
- (when (getenv "DISPLAY")
- (defun xsel-cut-function (text &optional push)
-    (with-temp-buffer
-    (insert text)
-    (call-process-region (point-min) (point-max) "xsel" nil 0 nil "--clipboard" "--input")))
- (defun xsel-paste-function()
-    (let ((xsel-output (shell-command-to-string "xsel --clipboard --output")))
-      (unless (string= (car kill-ring) xsel-output)
-        xsel-output )))
-    (setq interprogram-cut-function 'xsel-cut-function)
-    (setq interprogram-paste-function 'xsel-paste-function)))
 ;
 ;
 ;;; Modo markdown
@@ -389,17 +372,6 @@ w3m-cookie-accept-bad-cookies t)
 (require 'wget)
 (defvar wget-hide-status t
   "Default hide wget download window.")
-(defun wget-hide ()
-  "Hide wget download information."
-  (interactive)
-  (if (bufferp (get-buffer wget-process-buffer))
-      (delete-window (get-buffer-window (get-buffer wget-process-buffer))))
-  (setq wget-hide-status t))
-(defun wget-show ()
-  (interactive)
-  (call-interactively 'wget-state-of-progress)
-  (setq wget-hide-status nil))
-(provide 'wget-extension)
 ;
 ;
 ;;;;;; Modo latex
