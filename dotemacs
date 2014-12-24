@@ -44,7 +44,7 @@
 ;;; Diferenciar lo que es texto de lo que son órdenes para el formateo del texto:
 (global-font-lock-mode 1)
 ;
-;;; Il.luminar els parentesi i les claus per parelles:
+;;; Il·luminar els parentesi i les claus per parelles:
 (show-paren-mode 1)
 ;
 ;;; Fer servir la decoració de text següent:
@@ -193,7 +193,7 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;;; skeleton argument:
 (global-set-key (kbd "C-c z") 'argument)
 ;;; skeleton plantilla:
-(global-set-key (kbd "C-c u") 'plantilla)
+(global-set-key (kbd "C-c y") 'plantilla)
 ;;; skeleton logo:
 (global-set-key (kbd "C-c l") 'logo)
 ;;; Obre llistat d'arxius o directoris de forma ràpida:
@@ -275,7 +275,7 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;
 ;
 ;;; Navegador
-;;; Navegador w3m:
+; Navegador w3m:
 (setq w3m-home-page "http://google.es"
 w3m-default-display-inline-images t
 w3m-display-inline-image t
@@ -321,10 +321,10 @@ w3m-cookie-accept-bad-cookies t)
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/color-theme/"))
 (require 'color-theme)
 (color-theme-initialize)
-;;; L'esquema de color triat:
+;; L'esquema de color triat:
 ;(color-theme-charcoal-black)
 ;(color-theme-calm-forest)
-(color-theme-lethe)
+;(color-theme-lethe)
 ;(color-theme-oswald)
 ;(color-theme-taming-mr-arneson)
 ;(color-theme-jsc-dark)
@@ -334,7 +334,7 @@ w3m-cookie-accept-bad-cookies t)
 ;; La drecera de teclat és C-c 2
 (require 'recentf)
 (recentf-mode 1)
-(setq recentf-max-saved-items 200
+(setq recentf-max-saved-items 200)
 (setq recentf-max-menu-items 25)
 (recentf-mode)
 ;; Limpiar listado al inicio si se visitan remotos:
@@ -346,7 +346,7 @@ w3m-cookie-accept-bad-cookies t)
 (require 'type-break)
 ;; Frecuencia para tomar descansos en segundos (1 hora) :
 (setq type-break-interval (* 60 60))
-;; Para cada frecuencia anterior parar 5 minutos:
+; Para cada frecuencia anterior parar 5 minutos:
 (setq type-break-good-rest-interval (* 60 5))
 ;
 ;
