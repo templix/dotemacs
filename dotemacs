@@ -120,8 +120,11 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;;; Ordre en el que es mostra el buffers per la seva importancia:
 (setq ido-file-extensions-order '(".txt" ".tex" ".emacs"))
 ;
-;;; Ignorar majuscules
+;;; Ignorar mayúsculas en modo ido:
 (setq ido-case-fold t)
+;
+;;; Insensible a mayúsculas y minúsculas en las busquedas:
+(setq case-fold-search nil)
 ;
 ;;; Habilitar coincidencia aproximada:
 (setq ido-enable-flex-matching t)
@@ -375,16 +378,31 @@ w3m-cookie-accept-bad-cookies t)
 ;
 ;
 ;;;;;; Modo latex
-;; Que quant es carregui el mode major LaTeX s'activi automàticament reftex.
+;; Que quant es carregui el mode major LaTeX s'activi automàticament RefTeX.
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-;; Que AUCTEX delegui a RefTEX lo relatiu a la generació d'etiquetes.
+;; Que AUCTeX delegui a RefTeX lo relatiu a la generació d'etiquetes.
 (setq reftex-plug-into-AUCTeX t)
+;; Que AUCTeX detecte el uso de include o input
+(setq-default TeX-master nil)
+;; Guardar automáticamente la compilación:
+;(setq TeX-save-query nil)
+;; Analizar el documento al guardar:
+(setq TeX-auto-save t)
+;; Analizar el documento al cargar:
+(setq TeX-parse-self t)
 ;; Per a que els .tex s'obrin en latex-mode:
 (add-to-list 'auto-mode-alist '("\\.tex$" . latex-mode))
 ;; Corregir els comentaris mentre s'escriu. No les etiquetes ni les variables:
 ;; M-$ per veure opcions "i" per incorporar al diccionari.
 (setq flyspell-mode t)
-;
+;;;;;;;;;;;;;;;;;;;
+
+
+(setq TeX-auto-save t) ;AUCTeX detecta los .tex
+(setq TeX-parse-self t)
+
+
+
 ;
 ;;;;;; Escoltar música amb emms:
 (add-to-list 'load-path "~/.emacs.d/lips/")
