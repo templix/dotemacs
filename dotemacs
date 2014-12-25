@@ -394,7 +394,7 @@ w3m-cookie-accept-bad-cookies t)
 (add-to-list 'auto-mode-alist '("\\.tex$" . latex-mode))
 ;; Corregir els comentaris mentre s'escriu. No les etiquetes ni les variables:
 ;; M-$ per veure opcions "i" per incorporar al diccionari.
-(setq flyspell-mode t)
+;(setq flyspell-mode t)
 ;;;;;;;;;;;;;;;;;;;
 
 
@@ -422,4 +422,6 @@ w3m-cookie-accept-bad-cookies t)
 ;
 ;
 ;;;;;;;;; FI PRIMERA PART... CONTINUA A ~/.gnu-emacs ;;;;;;;;;;;
+;
+;(setq frame-title-format '("" "%b @ Emacs " emacs-version))
 ;
