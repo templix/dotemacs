@@ -71,8 +71,10 @@
 ;;; No fer copies de seguretat ni crear arxius #auto-save#
 (setq make-backup-files nil)
 (setq auto-save-default nil)
-;; Si volguessim copies de seguretat cada 5 minuts:
-;(setq auto-save-timeout 5)
+;; Si quisiéramos copias de seguridad cada 2 minutos:
+;(setq auto-save-timeout 120)
+;; Si quisiéramos copias de seguridad cada 20 modficaciones:
+;(setq auto-save-interval 20)
 ;
 ;;; guardar la sessió al tancar emacs i restaurar-la
 ;;; al arrancar-lo de nou. Posar a zero [0] per desactivar:
@@ -148,14 +150,24 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 (add-to-list 'auto-mode-alist '("\\.emacs$" . lisp-mode)
 			      '("\\.gnu-emacs$" . lisp-mode))
 ;
+;;; Mover a la papelera al borrar cosas:
+(setq delete-by-moving-to-trash t
+      trash-directory "~/.local/share/Trash/files")
+;
+;;; Codificación utf-8
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+;
 ;;; Guardar historial d'arxius visitats fins i tot entre sessions:
 (savehist-mode 1)
 ;
 ;;; No truncar el archivo de mensajes aunque sea grande:
 (setq message-log-max t)
 ;
-;;; Expandir verticalmente la ventana del minibuffer para contener
-;;  el texto que se pone cuando sea necesario:
+;;; Cuando sea necesario, expandir verticalmente la ventana del minibuffer
+;;  para contener el texto que se pone:
 (setq resize-mini-windows t)
 ;;; alies per a eval-buffer:
 (defalias 'eb 'eval-buffer)
@@ -431,5 +443,22 @@ w3m-cookie-accept-bad-cookies t)
 ;
 ;
 ;;;;;;;;; FI PRIMERA PART... CONTINUA A ~/.gnu-emacs ;;;;;;;;;;;
+;
+;
+;; (defun google-define-word-or-phrase (query)
+;;   (interactive "sInsert word or phrase to search: ")
+;;   (let* ((url (concat "http://www.google.com.pe/search?hl=en&q=define%3A"
+;;                       (replace-regexp-in-string " " "+" query)))
+;;          (definition
+;;            (save-excursion
+;;              (with-temp-buffer
+;;                (mm-url-insert url)
+;;                (goto-char (point-min))
+;;                (if (search-forward "No definitions found of " nil t)
+;;                    "No definitions found"
+;;                  (buffer-substring (search-forward "<li>")
+;;                                    (- (search-forward "<") 1)))))))
+;;     (message "%s: %s" query definition)))
+;; ;(global-set-key (kbd "C-c d") 'google-define-word-or-phrase)
 ;
 ;
