@@ -1,4 +1,3 @@
-
 ;;                   ___ _ __ ___   __ _  ___ ___
 ;;                  / _ \ '_ ` _ \ / _` |/ __/ __|
 ;;                 |  __/ | | | | | (_| | (__\__ \
@@ -131,10 +130,13 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;
 ;;; Redimensionar el minibuffer si es torna massa gran:
 (follow-mode t)
+;
 ;;; Fer servir espais en contes de tabulacions:
 (setq-default indent-tabs-mode nil)
-;; Que les tabulacions siguin de 4 espais:
+;
+;;; Que les tabulacions siguin de 4 espais:
 (setq tab-width 4)
+;
 ;;; Eliminar espais en blanc al final de la linia automàticament al guardar l'arxiu
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'write-file-hooks 'delete-trailing-whitespace nil t)
@@ -144,11 +146,17 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;
 ;;; Que els .emacs sobrin en lisp-mode
 (add-to-list 'auto-mode-alist '("\\.emacs$" . lisp-mode)
-						      '("\\.gnu-emacs$" . lisp-mode))
+			      '("\\.gnu-emacs$" . lisp-mode))
 ;
 ;;; Guardar historial d'arxius visitats fins i tot entre sessions:
 (savehist-mode 1)
 ;
+;;; No truncar el archivo de mensajes aunque sea grande:
+(setq message-log-max t)
+;
+;;; Expandir verticalmente la ventana del minibuffer para contener
+;;  el texto que se pone cuando sea necesario:
+(setq resize-mini-windows t)
 ;;; alies per a eval-buffer:
 (defalias 'eb 'eval-buffer)
 ;
@@ -313,8 +321,9 @@ w3m-cookie-accept-bad-cookies t)
 (lambda nil
 (concat (eshell/pwd)
 (if (= (user-uid) 0) " # " " $ "))))
-;;; fer servir bash en lloc de la shell d'emacs:
-(setq shell-file-name "/bin/bash")
+;;; Especificar ruta a la shell que vamos a usar:
+(setq explicit-shell-file-name "/bin/bash")
+(setq shell-file-name explicit-shell-file-name)
 ;;; missatge de benvinguda al entrar a la eshell:
 (setq eshell-banner-message "\n... entrant a  emacs shell...\n\n")
 ;
@@ -394,7 +403,7 @@ w3m-cookie-accept-bad-cookies t)
 (add-to-list 'auto-mode-alist '("\\.tex$" . latex-mode))
 ;; Corregir els comentaris mentre s'escriu. No les etiquetes ni les variables:
 ;; M-$ per veure opcions "i" per incorporar al diccionari.
-;(setq flyspell-mode t)
+(setq flyspell-mode nil)
 ;;;;;;;;;;;;;;;;;;;
 
 
@@ -423,5 +432,4 @@ w3m-cookie-accept-bad-cookies t)
 ;
 ;;;;;;;;; FI PRIMERA PART... CONTINUA A ~/.gnu-emacs ;;;;;;;;;;;
 ;
-;(setq frame-title-format '("" "%b @ Emacs " emacs-version))
 ;
