@@ -180,6 +180,14 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 (column-number-mode t)
 ;
 ;
+;;; Permitir seleccionar texto y pasarlo a minúsculas
+;;  Sin pedir confirmación (M-x downcase-region):
+(put 'downcase-region 'disabled nil)
+;;; Permitir seleccionar texto y pasarlo a mayúsculas
+;;  Sin pedir confirmación (M-x upcase-region):
+(put 'upcase-region 'disabled nil)
+;
+;
 ;;;;;;;;; Keys;;;;;;;;;;;;;;
 ;;; Comentar trossos de codi:
 (global-set-key (kbd "C-c c") 'comment-region)
@@ -416,14 +424,17 @@ w3m-cookie-accept-bad-cookies t)
 ;; Corregir els comentaris mentre s'escriu. No les etiquetes ni les variables:
 ;; M-$ per veure opcions "i" per incorporar al diccionari.
 (setq flyspell-mode nil)
-;;;;;;;;;;;;;;;;;;;
-
-
-(setq TeX-auto-save t) ;AUCTeX detecta los .tex
-(setq TeX-parse-self t)
-
-
-
+;
+;
+;;; Imprimir
+(setq lpr-command "enscript")
+;; list of strings to pass as extra options for the printer program
+;(setq lpr-switches (list "--font=Courier10"
+;                         "--no-header"
+;                         "--encoding=pslatin1"))
+;                   (format "--header=%s" (buffer-name))))
+(setq printer-name "HP_psc_1100_series")
+;
 ;
 ;;;;;; Escoltar música amb emms:
 (add-to-list 'load-path "~/.emacs.d/lips/")
@@ -440,6 +451,12 @@ w3m-cookie-accept-bad-cookies t)
 		".mov" ".avi" ".divx" ".ogm" ".asf" ".mkv" "http://" "mms://"
 		".rm" ".rmvb" ".mp4" ".flac" ".vob" ".m4a" ".flv" ".ogv" ".pls"))
         "mplayer" "-slave" "-quiet" "-really-quiet" "-fullscreen")
+;
+;
+;;; Limpiar con antiword ficheros .doc (apt-get install antiword)
+;;; http://www.emacswiki.org/emacs/download/no-word.el
+(autoload 'no-word "no-word" "word to txt")
+(add-to-list 'auto-mode-alist '("\\.doc$" . no-word))
 ;
 ;
 ;;;;;;;;; FI PRIMERA PART... CONTINUA A ~/.gnu-emacs ;;;;;;;;;;;
