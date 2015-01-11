@@ -193,8 +193,7 @@ With prefix arg (C-u), display of output is suppressed.
     (if (file-directory-p filename)
 	(setq filename (concat (buffer-name) ".pdf")))
     (if (get-buffer "*PostScript*") (kill-buffer "*PostScript*"))
-    (ps-spool-buffer-with-faces)
-    (set-buffer "*PostScript*")
+    (ps-spool-buffer-with-faces)    (set-buffer "*PostScript*")
     (shell-command-on-region 1 (point-max)
 			     (format "ps2pdf - %s" filename))
     (if (not quiet) (find-file filename))
@@ -336,6 +335,13 @@ With prefix arg (C-u), display of output is suppressed.
   (browse-url
 (concat "http://www.google.com.pe/search?hl=en&q=define%3A"
                        (thing-at-point 'word))))
+;
+;
+;; Funció per obrir directament el tractatus amb C-t:
+(defun tractatus ()
+  "Obrir el tractatus `~/tractatus/tractatus.txt'."
+    (interactive)
+      (find-file "~/tractatus/tractatus.txt"))
 ;
 ;
 ;;;;;;;;;;;;;;;;; PROVES A PARTIR D'AQUÍ;;;;;;;;;;;;;;;

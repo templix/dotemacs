@@ -1,4 +1,4 @@
-;;                   ___ _ __ ___   __ _  ___ ___
+;;                   __  _ __ ___   __ _  ___ ___
 ;;                  / _ \ '_ ` _ \ / _` |/ __/ __|
 ;;                 |  __/ | | | | | (_| | (__\__ \
 ;;                (_)___|_| |_| |_|\__,_|\___|___/
@@ -23,7 +23,9 @@
 ;
 ;
 ;; Emacs com a servidor:
-(server-start)
+(require 'server)
+(unless (server-running-p)
+  (server-start))
 ;
 ;(message "***** Entrant al meu arxiu .emacs *****")
 ;
@@ -246,6 +248,8 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;;;;;;;;;;;; Llançar el buffer scratch con C-c s:
 (global-set-key (kbd "C-c s")
   (lambda()(interactive)(switch-to-buffer "*scratch*")))
+;;; Obrir el tractatus
+(global-set-key (kbd "C-t") 'tractatus)
 ;;;;;;;;;;;; llançar el directori .emacs.d con C-c d:
 (global-set-key (kbd "C-c 1")
   (lambda()(interactive)(find-file "~/.emacs.d")))
@@ -367,7 +371,7 @@ w3m-cookie-accept-bad-cookies t)
 (require 'recentf)
 (recentf-mode 1)
 (setq recentf-max-saved-items 200)
-(setq recentf-max-menu-items 25)
+(setq recentf-max-menu-items 35)
 (recentf-mode)
 ;; Limpiar listado al inicio si se visitan remotos:
 ; (setq recentf-auto-cleanup 'never)
@@ -433,7 +437,7 @@ w3m-cookie-accept-bad-cookies t)
 ;                         "--no-header"
 ;                         "--encoding=pslatin1"))
 ;                   (format "--header=%s" (buffer-name))))
-(setq printer-name "HP_psc_1100_series")
+(setq printer-name "psc-1100-series")
 ;
 ;
 ;;;;;; Escoltar música amb emms:
@@ -460,22 +464,3 @@ w3m-cookie-accept-bad-cookies t)
 ;
 ;
 ;;;;;;;;; FI PRIMERA PART... CONTINUA A ~/.gnu-emacs ;;;;;;;;;;;
-;
-;
-;; (defun google-define-word-or-phrase (query)
-;;   (interactive "sInsert word or phrase to search: ")
-;;   (let* ((url (concat "http://www.google.com.pe/search?hl=en&q=define%3A"
-;;                       (replace-regexp-in-string " " "+" query)))
-;;          (definition
-;;            (save-excursion
-;;              (with-temp-buffer
-;;                (mm-url-insert url)
-;;                (goto-char (point-min))
-;;                (if (search-forward "No definitions found of " nil t)
-;;                    "No definitions found"
-;;                  (buffer-substring (search-forward "<li>")
-;;                                    (- (search-forward "<") 1)))))))
-;;     (message "%s: %s" query definition)))
-;; ;(global-set-key (kbd "C-c d") 'google-define-word-or-phrase)
-;
-;
