@@ -235,6 +235,8 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 (global-set-key (kbd "C-c v")'make-backup)
 ;;; Imprimir buffer a pdf con C-c p
 (global-set-key (kbd "C-c p") 'pdf-save-buffer)
+;;; Esconder/mostrar archivos ocultos:
+(global-set-key (kbd "C-c w") 'dired-dotfiles-toggle)
 ;;; Mostrar consola al pulsar F5:
 (global-set-key (kbd "<f5>") 'eshell)
 ;;; No tallar la paraula al final de la línia, clicant F6:
