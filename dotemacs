@@ -374,7 +374,6 @@ w3m-cookie-accept-bad-cookies t)
 (recentf-mode 1)
 (setq recentf-max-saved-items 200)
 (setq recentf-max-menu-items 35)
-(recentf-mode)
 ;; Limpiar listado al inicio si se visitan remotos:
 ; (setq recentf-auto-cleanup 'never)
 ;
@@ -466,3 +465,4 @@ w3m-cookie-accept-bad-cookies t)
 ;
 ;
 ;;;;;;;;; FI PRIMERA PART... CONTINUA A ~/.gnu-emacs ;;;;;;;;;;;
+;

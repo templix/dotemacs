@@ -265,6 +265,21 @@ With prefix arg (C-u), display of output is suppressed.
   (cond ((let ((process-connection-type nil)) (start-process "" nil "nautilus" ".")))))
 ;
 ;
+;;; En dired, función para mostrar/esconder archivos ocultos clicando C-c w
+(defun dired-dotfiles-toggle ()
+  "Show/hide dot-files"
+  (interactive)
+  (when (equal major-mode 'dired-mode)
+    (if (or (not (boundp 'dired-dotfiles-show-p)) dired-dotfiles-show-p) ; if currently showing
+        (progn
+          (set (make-local-variable 'dired-dotfiles-show-p) nil)
+          (message "h")
+          (dired-mark-files-regexp "^\\\.")
+          (dired-do-kill-lines))
+      (progn (revert-buffer) ; otherwise just revert to re-show
+                    (set (make-local-variable 'dired-dotfiles-show-p) t)))))
+;
+;
 ;;; Copi/paste emacs --> X i X --> emacs
 ;; http://hugoheden.wordpress.com/2009/03/08/copypaste-with-emacs-in-terminal/
 (setq x-select-enable-clipboard t)
@@ -344,16 +359,5 @@ With prefix arg (C-u), display of output is suppressed.
       (find-file "~/tractatus/tractatus.txt"))
 ;
 ;
+;
 ;;;;;;;;;;;;;;;;; PROVES A PARTIR D'AQUÍ;;;;;;;;;;;;;;;
-(defun dired-dotfiles-toggle ()
-  "Show/hide dot-files"
-  (interactive)
-  (when (equal major-mode 'dired-mode)
-    (if (or (not (boundp 'dired-dotfiles-show-p)) dired-dotfiles-show-p) ; if currently showing
-        (progn
-          (set (make-local-variable 'dired-dotfiles-show-p) nil)
-          (message "h")
-          (dired-mark-files-regexp "^\\\.")
-          (dired-do-kill-lines))
-      (progn (revert-buffer) ; otherwise just revert to re-show
-                    (set (make-local-variable 'dired-dotfiles-show-p) t)))))
