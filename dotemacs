@@ -11,33 +11,33 @@
 ;; =--------------------------------------------------------------=
 ;
 ;
-;;;;;; Ajustaments generals;;;;;;;;;;;;;;
+;;;;;; Ajustes generales;;;;;;;;;;;;;;
 ;
 ;
-;;; Algunes coses que podem implementar para l'arrencada:
+;;; Algunqs cosas que podemos implementar en el arranque:
 ;(split-window-horizontally)   ;; Iniciar con la ventana dividida es dos
-;(other-window 1)              ;; Moure's al segon panel
-;(shell)                       ;; Llançar-hi una shell
-;(rename-buffer "shell-1")     ;; Enumerar-la com a "shell-1"
-;(other-window 1)              ;; Anar novament al primer panell
+;(other-window 1)              ;; Moverse al segundo panel
+;(shell)                       ;; Lanzar una shell
+;(rename-buffer "shell-1")     ;; Enumerarla como "shell-1"
+;(other-window 1)              ;; Ir nuevamente al primer panel
 ;
 ;
-;; Emacs com a servidor:
+;; Emacs como servidor:
 (require 'server)
 (unless (server-running-p)
   (server-start))
 ;
-;(message "***** Entrant al meu arxiu .emacs *****")
+;(message "***** Entrando en mi archivo .emacs *****")
 ;
-;;; No mostrar els missatges d'inici. Incompatible amb message anterior
+;;; No mostrar mensajes de inicio. Incompatible con mensaje anterior
 (setq inhibit-startup-message t)
 ;
-;;; tipus de sistema
+;;; tipos de sistema
 (defun insert-system-type()
 (interactive)
 (insert (format "%s" system-type)))
 ;
-;;; nom del sistema
+;;; nombre del sistema
 (defun insert-system-name()
 (interactive)
 (insert (format "%s" system-name)))
@@ -45,32 +45,32 @@
 ;;; Diferenciar lo que es texto de lo que son órdenes para el formateo del texto:
 (global-font-lock-mode 1)
 ;
-;;; Il·luminar els parentesi i les claus per parelles:
+;;; Iluminar los parentesis y las llaves por parejas:
 (show-paren-mode 1)
 ;
-;;; Fer servir la decoració de text següent:
-;;;(bash, la màxima  [t], latex, la mínima [1], un entremig seria valor 2
+;;; Usar decoración de texto siguiente:
+;;;(bash, la máxima  [t], latex, la mínima [1], un entremedio. Sería valor 2
 (setq font-lock-maximum-decoration
       '((shell-mode . t) (latex-mode . 2)))
 ;
-;;; Que mostri las sortides de shell en colors:
+;;; Que muestre las salidas de shell en colores:
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
-;;; especificar directori per les extensions:
+;;; especificar directorio para las extensiones:
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp"))
 ;
-;;; Modus inicial per defecte
+;;; Modo inicial por defecto:
 (setq default-major-mode 'text-mode)
 ;
-;;; Donar permisos D'execució al fitxer si és un script i poder-lo
-;;; executar amb C-c e
+;;; Dar permisos de execución al fichero si és un script y poderlo
+;;; ejecutar con C-c e
 (setq after-save-hook (quote (executable-make-buffer-file-executable-if-script-p)))
 ;
-;; Veure depuració d'scripts de manera ràpida
+;; Ver depuración de scripts de forma rápida:
 ;;; quickrum (https://raw.github.com/syohex/emacs-quickrun/master/quickrun.el)
 (require 'quickrun)
 ;
-;;; No fer copies de seguretat ni crear arxius #auto-save#
+;;; No hacer copias de seguredad ni crear archvoss #auto-save#
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 ;; Si quisiéramos copias de seguridad cada 2 minutos:
@@ -78,26 +78,26 @@
 ;; Si quisiéramos copias de seguridad cada 20 modficaciones:
 ;(setq auto-save-interval 20)
 ;
-;;; guardar la sessió al tancar emacs i restaurar-la
-;;; al arrancar-lo de nou. Posar a zero [0] per desactivar:
+;;; guardar la sessión al cerrar emacs i restaurarla
+;;; al arrancar-lo de nuevo. Poner a cero [0] para desactivar:
 (desktop-save-mode 1)
 ;
-;;; No mostrar la barra del menú
+;;; No mostrar la barra del menú:
 (menu-bar-mode -1)
 ;
-;;; Amagar les contrasenyes quant les teclegem.
+;;; Esconder las contraseñas cuando se teclee:
 (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
 ;
-;;; Descomprimir arxius
+;;; Descomprimir archivos:
 (auto-compression-mode t)
 ;
-;;; Reemplaçar "yes" y "no" per "y" y "n" en el prompt
+;;; Reemplazar "yes" y "no" para "y" y "n" en el prompt
 (fset 'yes-or-no-p 'y-or-n-p)
 ;
-;;; Confirmar per sortir d'emacs:
+;;; Pedir confirmación para salir de emacs:
 ;(setq confirm-kill-emacs 'yes-or-no-p)
-;;; Realçar la línea del focus. drecera: C-c i
-;
+;;; Realzar la línea del foco. Atajo para activa/desactivar: C-c i
+;;; y hacerlo con fondo azul:
 (global-hl-line-mode 0)
 (set-face-background 'hl-line "blue")
 ;
@@ -105,7 +105,7 @@
 ;;; Activar indicador de bateria:
 ;(display-battery-mode 1)
 ;
-;;; rellotge amb format 24 hores
+;;; reloj con formato 24 horas
 ;; Mostrar fecha y hora
 ;'(display-time-format "%a %x")
 (setq display-time-day-and-date t
@@ -116,11 +116,14 @@
 (setq calendar-week-start-day 1
 calendar-day-name-array ["Dg" "Dl" "Dt" "Dc" "Dj" "Dv" "Ds"]
 calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Juliol" "Agost" "Setembre" "Octubre" "Novembre" "Decembre"])
+;;; Poner en castellano el calendario:
+;calendar-day-name-array ["Lu" "Ma" "Mi" "Ju" "Vi" "Sa" "Do"]
+;calendar-month-name-array ["Enero" "Febrero" "Marzo" "Abril" "Mayo" "Junio" "Julio" "Agosto" "Setiembre" "Octubre" "Noviembre" "Diciembre"])
 ;
-;;; Afegir un espai entra el número de linia i el text de la linia:
+;;; Añadir un espacio entre el número de linia y el texto de la línia:
 (setq linum-format "%d ")
 ;
-;;; Ordre en el que es mostra el buffers per la seva importancia:
+;;; Orden en el que se muestran los buffers según su importancia:
 (setq ido-file-extensions-order '(".txt" ".tex" ".emacs"))
 ;
 ;;; Ignorar mayúsculas en modo ido:
@@ -132,23 +135,23 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;;; Habilitar coincidencia aproximada:
 (setq ido-enable-flex-matching t)
 ;
-;;; Redimensionar el minibuffer si es torna massa gran:
+;;; Redimensionar el minibuffer si es demasiado grande:
 (follow-mode t)
 ;
-;;; Fer servir espais en contes de tabulacions:
+;;; Usar espacio en lugar de tabulaciones:
 (setq-default indent-tabs-mode nil)
 ;
-;;; Que les tabulacions siguin de 4 espais:
+;;; Que las tabulaciones sean de 4 espacios:
 (setq tab-width 4)
 ;
-;;; Eliminar espais en blanc al final de la linia automàticament al guardar l'arxiu
+;;; Eliminar espacios en blanco al final de la línia automáticament al guardar el archivo
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'write-file-hooks 'delete-trailing-whitespace nil t)
 ;
-;;; Llegir també aquest arxiu d'extensió de la configuració:
+;;; Leer tambien el archivo de configuración:
 (load "~/.gnu-emacs")
 ;
-;;; Que els .emacs sobrin en lisp-mode
+;;; Que los .emacs se abran en lisp-mode
 (add-to-list 'auto-mode-alist '("\\.emacs$" . lisp-mode)
 			      '("\\.gnu-emacs$" . lisp-mode))
 ;
@@ -162,7 +165,7 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 ;
-;;; Guardar historial d'arxius visitats fins i tot entre sessions:
+;;; Guardar historial de archivos visitados incluso entre sesiones:
 (savehist-mode 1)
 ;
 ;;; No truncar el archivo de mensajes aunque sea grande:
@@ -171,14 +174,14 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;;; Cuando sea necesario, expandir verticalmente la ventana del minibuffer
 ;;  para contener el texto que se pone:
 (setq resize-mini-windows t)
-;;; alies per a eval-buffer:
+;;; alias para para eval-buffer:
 (defalias 'eb 'eval-buffer)
 ;
-;;; Formatar las línies d'un text a 70 espais
-;;  (M-x auto-fill-mode i després clicar ESP) Per fer-ho permanent:
+;;; Formatear las línias de un texto a 70 espacios
+;;  (M-x auto-fill-mode y después clicar ESP) Para hacerlo permanente:
 ;(add-hook 'text-mode-hook 'turn-on-auto-fill)
 ;
-;;; Mostrar a la línia de mode la columna al costat del número de línia:
+;;; Mostrar la línea de modo al lado del número de línia:
 (column-number-mode t)
 ;
 ;
@@ -191,32 +194,32 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;
 ;
 ;;;;;;;;; Keys;;;;;;;;;;;;;;
-;;; Comentar trossos de codi:
+;;; Comentar trozos de codigo:
 (global-set-key (kbd "C-c c") 'comment-region)
-;;; Descomentar trossos de codi:
+;;; Descomentar trozos de codigo:
 (global-set-key (kbd "C-c u") 'uncomment-region)
-;;; Anar a la linea...
+;;; Ir a la línea...
 (global-set-key (kbd "C-c g") 'goto-line)
-;;; Obrir terminals:
+;;; Abrir terminales:
 (global-set-key (kbd "C-c t") 'multi-term-next)
-(global-set-key (kbd "C-c T") 'multi-term) ;; Obrir nova terminal
-;;; Obrir firefox:
+(global-set-key (kbd "C-c T") 'multi-term) ;; Abrir nueva terminal
+;;; Abrir firefox:
 (global-set-key (kbd "C-c f") 'browse-url-firefox)
-;;; Abrir una URL de w3m al navegador extern:
+;;; Abrir una URL de w3m en el navegador externo:
 (global-set-key (kbd "C-c a") 'w3m-external-view-this-url)
-;;; Posar el cursor sobre una URL d'un text i obrir-la al firefox
-;;; Creada la funció w3mext
+;;; Poner el cursor sobre una URL de un texto y abrirla en el firefox
+;;; Creada la función w3mext
 (global-set-key (kbd "C-c b") 'w3mext-open-link-or-image-or-url)
 ;;; executar scripts:
 (global-set-key (kbd "C-c e") 'executable-interpret)
-;;; executar scripts amb quickrun:
+;;; executar scripts con quickrun:
 (global-set-key (kbd "C-c r") 'quickrun)
-;;; obrir menu dels buffers oberts:
+;;; Abrir menu de los buffers abiertos:
 (global-set-key (kbd "C-c m") 'buffer-menu)
 ;;; imprimir a ps (C-u M-x ps-print-buffer-with-faces)
 ;;; pasar a pdf: ps2pdf arxiu.ps arxiu.pdf
 ;(global-set-key (kbd "C-c i") 'ps-print-buffer-with-faces)
-;;; Dreceres de teclat skeleton per a latex
+;;; Atajos de teclado para latex (skeleton)
 ;;; Resaltar la linea del foco:
 (global-set-key (kbd "C-c i") 'global-hl-line-mode)
 ;;; skeleton dialeg:
@@ -229,7 +232,7 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 (global-set-key (kbd "C-c y") 'plantilla)
 ;;; skeleton logo:
 (global-set-key (kbd "C-c l") 'logo)
-;;; Obre llistat d'arxius o directoris de forma ràpida:
+;;; Abre listado de archivos o directorios de forma rápida:
 (global-set-key (kbd "C-c x") 'xah-open-file-fast)
 ;;; Crear backup del buffer actual:
 (global-set-key (kbd "C-c v")'make-backup)
@@ -239,36 +242,36 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 (global-set-key (kbd "C-c w") 'dired-dotfiles-toggle)
 ;;; Mostrar consola al pulsar F5:
 (global-set-key (kbd "<f5>") 'eshell)
-;;; No tallar la paraula al final de la línia, clicant F6:
+;;; No cortar la palabra al final de la línia, clicando F6:
 (global-set-key (kbd "<f6>") 'global-visual-line-mode)
-;;; Mostar/amagar números de línia amb F7 (Linum-Mode)
+;;; Mostar/esconder números de línia con F7 (Linum-Mode)
 (global-set-key (kbd "<f7>") 'global-linum-mode)
-;;; Obrir amb app externa amb F8:
+;;; Abrir con app externa con F8:
 (global-set-key (kbd "<f8>") 'external-app)
-;;; llançar blog de notes amb F9:
+;;; lanzar blog de notas con F9:
 (global-set-key (kbd "<f9>") 'remember)
-;;;;;;;;;;;; Llançar el buffer scratch con C-c s:
+;;;;;;;;;;;; Lanzar el buffer scratch con C-c s:
 (global-set-key (kbd "C-c s")
   (lambda()(interactive)(switch-to-buffer "*scratch*")))
-;;; Obrir el tractatus
+;;; Abrir el tractatus
 (global-set-key (kbd "C-t") 'tractatus)
 ;;;;;;;;;;;; llançar el directori .emacs.d con C-c d:
 (global-set-key (kbd "C-c 1")
   (lambda()(interactive)(find-file "~/.emacs.d")))
-;;; Reobrir algun dels darrers 25 buffer oberts,
-;;; fins i tot els tancats:
+;;; Reabrir alguno de los últimos 25 buffer abiertos,
+;;; incluso los cerrados:
 (global-set-key (kbd "C-c 2") 'recentf-open-files)
 ;
 ;
 ;
 ;
 ;
-;;;;;;;;;;;; Ajustaments a les extensions ;;;;;;;;;;;;
+;;;;;;;;;;;; Ajustes en las extensiones ;;;;;;;;;;;;
 ;
 ;
-;;; blog de notes.
-;;; LLançar amb M-x remember (o F9). C-c C-c per posar data i hora
-;;; Crea l'arxiu ~/.notes amb totes les notes que anem posant.
+;;; blog de notas.
+;;; Lanzar con M-x remember (o F9). C-c C-c para poner fecha y hora
+;;; Crea el archivo ~/notes con todas las notas entradas:
 ;;; cd ~/.emacs.d
 ;;; git clone git://repo.or.cz/remember-el.git remember
 (add-to-list 'load-path "~/.emacs.d/remember")
@@ -276,17 +279,18 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;
 ;
 ;;; Multi-term
-;;; Obrir amb M-x multi-term o amb la drecera (C-c t o C-c T). Descarregar de:
+;;; Abrir con M-x multi-term o con el atajo (C-c t o C-c T). Descargar de:
 ;;; http://www.emacswiki.org/emacs/download/multi-term.el
 (autoload 'multi-term "multi-term" nil t)
 (autoload 'multi-term-next "multi-term" nil t)
-(setq multi-term-program "/bin/bash")   ;; use bash
+;; que use bash
+(setq multi-term-program "/bin/bash")
 ;
 ;
 ;;; package.el (emacs24)
 ;;; (http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el)
-;;; Paquets llestos per a instal·lar (tipus apt-get). M-x package-list-packages (update) M-x list-packages (llistar)
-;;; Per activar el modo: M-x package-menu-mode
+;;; Paquetes listos para instalar (tipo apt-get). M-x package-list-packages (update) M-x list-packages (llistar)
+;;; Para activar el modo: M-x package-menu-mode
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/package.el"))
 (require 'package)
 (package-initialize)
@@ -295,17 +299,17 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
 ;
 ;
-;;; Referent al paquet ido:
+;;; Referente al paquete ido:
 (require 'ido)
 ;(setq ido-enable-flex-matching t)
 ;(setq ido-everywhere t)
 (ido-mode 'buffers)
-;;; Ignorar determinats buffers perquè no surtin al pulsar C-x b
+;;; Ignorar determinados buffers para que no salgan al pulsar C-x b
 (setq ido-ignore-buffers '("^ " "*Completions*" "*Shell Command Output*"
                            "*Messages*" "Async Shell Command" "*scratch*"
                            "*tramp*"))
-; Veure el llistat vertical quant es pulsa C-x b
-; M-x package-install i entrar:   ido-vertical-mode el paquet està a MELPA
+; Ver el listado vertical cuando se pulsa C-x b
+; M-x package-install y entrar:   ido-vertical-mode el paquete está a MELPA
 ;(require 'ido-vertical-mode)
 ;(ido-mode 1)
 ;(ido-vertical-mode 1)
@@ -322,16 +326,16 @@ w3m-cookie-accept-bad-cookies t)
 ;
 ;
 ;;; ssh
-;;; Accés ssh (C-x C-f /ssh:usuari@IP:/home/usuari):
+;;; Acceso ssh (C-x C-f /ssh:usuario@IP:/home/usuario):
 (require 'tramp)
 (setq tramp-default-method "ssh")
-;;; activar variables per veure sortida de problemes amb tramp
+;;; activar variables para ver salida de problemas con tramp
 (setq tramp-debug-buffer t)
 (setq tramp-verbose 10)
 ;
 ;
 ;;; sudo:
-;;; Forma d'us [C-x C-f /sudo::/etc/hosts]
+;;; Forma de uso [C-x C-f /sudo::/etc/hosts]
 ;;; C-x C-f /sudo:root@localhost:/etc/hosts o C-x sudo-find-file
 (defun sudo-find-file (file-name)
   "Like find file, but opens the file as root."
@@ -341,7 +345,7 @@ w3m-cookie-accept-bad-cookies t)
 ;
 ;
 ;;; Ajustar el prompt de eshell
-;;; Modificar el prompt per mostrar el directori de treball
+;;; Modificar el prompt para mostrar el directorio de trebajo
 ;;; Per mostrar l'usuari: (concat (getenv "USER")
 (setq eshell-prompt-function
 (lambda nil
@@ -350,16 +354,16 @@ w3m-cookie-accept-bad-cookies t)
 ;;; Especificar ruta a la shell que vamos a usar:
 (setq explicit-shell-file-name "/bin/bash")
 (setq shell-file-name explicit-shell-file-name)
-;;; missatge de benvinguda al entrar a la eshell:
+;;; mensaje de bienvenida al entrar a la eshell:
 (setq eshell-banner-message "\n... entrant a  emacs shell...\n\n")
 ;
 ;
-;;; Colors:
-;;; Posar esquemes de colors
+;;; Colores:
+;;; Poner esquemas de colores
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/color-theme/"))
 (require 'color-theme)
 (color-theme-initialize)
-;; L'esquema de color triat:
+;; Esquema de color escogido:
 ;(color-theme-charcoal-black)
 ;(color-theme-calm-forest)
 ;(color-theme-lethe)
@@ -369,7 +373,7 @@ w3m-cookie-accept-bad-cookies t)
 ;
 ;
 ;;;;; Reabrir algún buffer cerrado anteriormente
-;; La drecera de teclat és C-c 2
+;; El atajo de teclado es C-c 2
 (require 'recentf)
 (recentf-mode 1)
 (setq recentf-max-saved-items 200)
@@ -388,7 +392,7 @@ w3m-cookie-accept-bad-cookies t)
 ;
 ;
 
-;;; Obrir amb apps externes amb "intro" (~/.emacs.d/openwith.el)
+;;; Abrir con apps externas con "intro" (~/.emacs.d/openwith.el)
 (require 'openwith)
 (openwith-mode t)
 (require 'mm-util)
@@ -404,7 +408,7 @@ w3m-cookie-accept-bad-cookies t)
 ;
 ;
 ;;; emacs-wget (http://www.filewatcher.com/m/emacs-wget.tbz.29-1.html)
-;;; Las descarrregues a ~/download
+;;; Las descargas a ~/download
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/wget"))
 (require 'wget)
 (defvar wget-hide-status t
@@ -412,9 +416,9 @@ w3m-cookie-accept-bad-cookies t)
 ;
 ;
 ;;;;;; Modo latex
-;; Que quant es carregui el mode major LaTeX s'activi automàticament RefTeX.
+;; Que cuando se cargue el mode mayor LaTeX se active automáticament RefTeX.
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-;; Que AUCTeX delegui a RefTeX lo relatiu a la generació d'etiquetes.
+;; Que AUCTeX delegue a RefTeX lo relativo a la generación de etiquetas.
 (setq reftex-plug-into-AUCTeX t)
 ;; Que AUCTeX detecte el uso de include o input
 (setq-default TeX-master nil)
@@ -424,10 +428,10 @@ w3m-cookie-accept-bad-cookies t)
 (setq TeX-auto-save t)
 ;; Analizar el documento al cargar:
 (setq TeX-parse-self t)
-;; Per a que els .tex s'obrin en latex-mode:
+;; Para que los .tex se abran en latex-mode:
 (add-to-list 'auto-mode-alist '("\\.tex$" . latex-mode))
-;; Corregir els comentaris mentre s'escriu. No les etiquetes ni les variables:
-;; M-$ per veure opcions "i" per incorporar al diccionari.
+;; Corregir los comentarios mientras se escribe. No las etiquetas ni las variables:
+;; M-$ para ver opciones "i" para incorporar al diccionario.
 (setq flyspell-mode nil)
 ;
 ;
@@ -441,7 +445,7 @@ w3m-cookie-accept-bad-cookies t)
 (setq printer-name "psc-1100-series")
 ;
 ;
-;;;;;; Escoltar música amb emms:
+;;;;;; Escuchar música con emms:
 (add-to-list 'load-path "~/.emacs.d/lips/")
 (require 'emms)
 (emms-standard)
@@ -464,5 +468,5 @@ w3m-cookie-accept-bad-cookies t)
 (add-to-list 'auto-mode-alist '("\\.doc$" . no-word))
 ;
 ;
-;;;;;;;;; FI PRIMERA PART... CONTINUA A ~/.gnu-emacs ;;;;;;;;;;;
+;;;;;;;;; FIN PRIMERA PARTE... CONTINUA A ~/.gnu-emacs ;;;;;;;;;;;
 ;
