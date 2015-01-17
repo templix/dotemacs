@@ -468,5 +468,5 @@ w3m-cookie-accept-bad-cookies t)
 (add-to-list 'auto-mode-alist '("\\.doc$" . no-word))
 ;
 ;
-;;;;;;;;; FIN PRIMERA PARTE... CONTINUA A ~/.gnu-emacs ;;;;;;;;;;;
+;;;;;;;;; FIN PRIMERA PARTE... CONTINUA EN ~/.gnu-emacs ;;;;;;;;;;;
 ;
