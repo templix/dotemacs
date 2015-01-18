@@ -122,7 +122,7 @@ abrirlos de forma rápida.")
         ("telegram" . "~/.telegram-cli/downloads" )
         ("backups" . "/media/DADES/dades/arxius_importants/" )
         ("tractatus" . "~/tractatus/tractatus.txt" )
-        ;; more here
+        ;; Más entradas ...
         ) )
 ;
 (defun xah-open-file-fast (openCode)
@@ -359,5 +359,22 @@ With prefix arg (C-u), display of output is suppressed.
       (find-file "~/tractatus/tractatus.txt"))
 ;
 ;
+;; Abrir mi .bashrc:
+(defun bashrc ()
+  "Abrir `~/.bashrc'."
+  (interactive)
+    (find-file "~/.bashrc"))
+;
+;
+;; Función para abrir archivos con privilegios de administrador
+(defun sudo-open-file (file)
+  "Abrir archivo com privilegios de root"
+  (interactive "FFind file: ")
+  (set-buffer
+   (find-file
+    (concat "/sudo::"
+            (expand-file-name file)))))
+;
 ;
 ;;;;;;;;;;;;;;;;; PRUEBAS A PARTIR DE AQUÍ;;;;;;;;;;;;;;;
+;

@@ -193,6 +193,13 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 (put 'upcase-region 'disabled nil)
 ;
 ;
+;;; Si tenemos un archivo sensible (contraseñas, códigos...) podemos
+;;; ocultarlo del archivo de configuración. Las siguientes lineas
+;;; lo leen si existe.
+(if (file-exists-p "~/.emacs.secrets")
+        (load-file "~/.emacs.secrets"))
+;
+;
 ;;;;;;;;; Keys;;;;;;;;;;;;;;
 ;;; Comentar trozos de codigo:
 (global-set-key (kbd "C-c c") 'comment-region)
@@ -345,8 +352,8 @@ w3m-cookie-accept-bad-cookies t)
 ;
 ;
 ;;; Ajustar el prompt de eshell
-;;; Modificar el prompt para mostrar el directorio de trebajo
-;;; Per mostrar l'usuari: (concat (getenv "USER")
+;;; Modificar el prompt para mostrar el directorio de trabajo
+;;; Para mostrar el usuario: (concat (getenv "USER")
 (setq eshell-prompt-function
 (lambda nil
 (concat (eshell/pwd)
