@@ -376,5 +376,23 @@ With prefix arg (C-u), display of output is suppressed.
             (expand-file-name file)))))
 ;
 ;
+;; Guardar un completo historial de todo lo que ocurre en la sesión:
+(setq savehist-file "~/.emacs.d/savehist")
+(savehist-mode 1)
+(setq history-length t)
+(setq history-delete-duplicates t)
+(setq savehist-save-minibuffer-history 1)
+(setq savehist-additional-variables
+      '(kill-ring
+        search-ring
+                regexp-search-ring))
+;
+;
 ;;;;;;;;;;;;;;;;; PRUEBAS A PARTIR DE AQUÍ;;;;;;;;;;;;;;;
+;
+;(setq dired-auto-revert-buffer t)
+;
+
+
+;
 ;
