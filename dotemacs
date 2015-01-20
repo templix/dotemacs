@@ -200,6 +200,20 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
         (load-file "~/.emacs.secrets"))
 ;
 ;
+;;; Preservar enlaces duros del archivo que se está editando.
+;;; especialmente importante si se edita archivos de sistema:
+(setq backup-by-copying-when-linked t)
+;
+;
+;;; Preservar el propietario y el grupo del archivo que se está editando.
+;;; especialmente importante si se edita archivos como root:
+(setq backup-by-copying-when-mismatch t)
+;
+;
+;;; Introducir el depurador cada vez que se encuentre un error:
+;(setq debug-on-error t)
+;
+;
 ;;;;;;;;; Keys;;;;;;;;;;;;;;
 ;;; Comentar trozos de codigo:
 (global-set-key (kbd "C-c c") 'comment-region)
@@ -477,3 +491,18 @@ w3m-cookie-accept-bad-cookies t)
 ;
 ;;;;;;;;; FIN PRIMERA PARTE... CONTINUA EN ~/.gnu-emacs ;;;;;;;;;;;
 ;
+(mapcar
+ (lambda (r)
+   (set-register (car r) (cons 'file (cdr r))))
+ '((?i . "~/.emacs.d/")
+   (?o . "~/personal/organizer.org")
+   (?b . "~/personal/business.org")
+   (?B . "~/Dropbox/books")
+   (?e . "~/code/dev/emacs-notes/tasks.org")
+   (?w . "~/Dropbox/public/sharing/index.org")
+   (?W . "~/Dropbox/public/sharing/blog.org")
+   (?j . "~/personal/journal.org")
+   (?I . "~/Dropbox/Inbox")
+   (?g . "~/sachac.github.io/evil-plans/index.org")
+   (?c . "~/code/dev/elisp-course.org")
+      (?l . "~/dropbox/public/sharing/learning.org")))
