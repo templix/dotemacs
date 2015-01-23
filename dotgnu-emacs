@@ -126,19 +126,14 @@ abrirlos de forma rápida.")
         ) )
 ;
 ;
-;;;;; Otra forma de acceder a determinados archivos o directorios
+;;;;; Otra forma de acceder a determinados archivos.
 ;;;;; Pulsando "C-x r j" y la letra que indica después del interrogante
 ;;;;; Ejemplo: "C-x r j e" para ir a .emacs.d
 (mapcar
  (lambda (r)
    (set-register (car r) (cons 'file (cdr r))))
- '((?e . "~/.emacs.d/")
-   (?d . "~/Dropbox/dades")
-   (?b . "~/Baixades")
-   (?m . "/media/DADES")
-   (?s . "/")
-   (?p . "~/scripts")
-   (?r . "~/repositori")))
+ '((?l . "~/.config/openbox/lxde-rc.xml")
+   (?b . "~/.bashrc")))
 ;
 ;
 (defun xah-open-file-fast (openCode)
@@ -407,8 +402,4 @@ With prefix arg (C-u), display of output is suppressed.
 ;;;;;;;;;;;;;;;;; PRUEBAS A PARTIR DE AQUÍ;;;;;;;;;;;;;;;
 ;
 ;(setq dired-auto-revert-buffer t)
-;
-
-
-;
 ;

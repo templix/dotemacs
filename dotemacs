@@ -421,7 +421,7 @@ w3m-cookie-accept-bad-cookies t)
 ;
 ;
 ;;; Modo markdown
-(add-to-list 'load-path "~/.emacs.d/markdown-mode")
+(add-to-list 'load-path "~/.emacs.d/lisp/markdown-mode")
 (autoload 'markdown-mode "markdown-mode" t)
 ; "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
@@ -491,18 +491,3 @@ w3m-cookie-accept-bad-cookies t)
 ;
 ;;;;;;;;; FIN PRIMERA PARTE... CONTINUA EN ~/.gnu-emacs ;;;;;;;;;;;
 ;
-(mapcar
- (lambda (r)
-   (set-register (car r) (cons 'file (cdr r))))
- '((?i . "~/.emacs.d/")
-   (?o . "~/personal/organizer.org")
-   (?b . "~/personal/business.org")
-   (?B . "~/Dropbox/books")
-   (?e . "~/code/dev/emacs-notes/tasks.org")
-   (?w . "~/Dropbox/public/sharing/index.org")
-   (?W . "~/Dropbox/public/sharing/blog.org")
-   (?j . "~/personal/journal.org")
-   (?I . "~/Dropbox/Inbox")
-   (?g . "~/sachac.github.io/evil-plans/index.org")
-   (?c . "~/code/dev/elisp-course.org")
-      (?l . "~/dropbox/public/sharing/learning.org")))
