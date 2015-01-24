@@ -1,7 +1,7 @@
 ;;
-;;;;;;;; CONTINUACIÓN DE .emacs ;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;; CONTINUACIÓN DE .emacs ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;;;;;;;;;;;;;; skeleton ;;;;;;;;;;;;;;;;
+;;; Plantillas skeleton ;;;;;;;;;;;;;;;;
 (define-skeleton logo
   "Cabecera (C-c l)"
   "logo: "
@@ -17,8 +17,7 @@
   ";; =         https://tractatuslapipaplena.herokuapp.com/          =\n"
   ";; =--------------------------------------------------------------=\n")
 ;
-;
-;;;;;; skeleton per a latex:
+;;; Plantillas  skeleton para latex:
 (define-skeleton dialeg
   "Para los diálegos de los personages(C-c d)"
   "dialeg: "
@@ -94,11 +93,13 @@
 "\\end{document}\n")
 ;
 ;
+;
+;
 ;;;;;;;;;;; FUNCIONES ;;;;;;;;;;;;;;;;;;;;;;
 ;
 ;
-;;;;; Poner el cursor sobre una URL de un texto y abrirla al firefox (función)
-;; El atajo de teclado es C-c b
+;;; Poner el cursor sobre una URL de un texto y abrirla al firefox (función)
+;;; El atajo de teclado es C-c b
 (defun w3mext-open-link-or-image-or-url ()
 ;    "Opens the current link or image or current page's uri or any
 ;url-like text under cursor in firefox."
@@ -112,8 +113,7 @@
 					    "URL: "))))
 	  ))
 ;
-;
-;;;;; Abrir archivos o directorios de forma rápida (C-c x).
+;;; Abrir archivos o directorios de forma rápida (C-c x).
 (require 'ido)
 (defvar xah-filelist nil "Lista de archivos o directorios que permite
 abrirlos de forma rápida.")
@@ -125,16 +125,14 @@ abrirlos de forma rápida.")
         ;; Más entradas ...
         ) )
 ;
-;
-;;;;; Otra forma de acceder a determinados archivos.
-;;;;; Pulsando "C-x r j" y la letra que indica después del interrogante
-;;;;; Ejemplo: "C-x r j e" para ir a .emacs.d
+;;; Otra forma de acceder a determinados archivos.
+;;; Pulsando "C-x r j" y la letra que indica después del interrogante
+;;; Ejemplo: "C-x r j e" para ir a .emacs.d
 (mapcar
  (lambda (r)
    (set-register (car r) (cons 'file (cdr r))))
  '((?l . "~/.config/openbox/lxde-rc.xml")
    (?b . "~/.bashrc")))
-;
 ;
 (defun xah-open-file-fast (openCode)
   "Función para abrir el archivo o directorio predefinido"
@@ -144,10 +142,9 @@ abrirlos de forma rápida.")
    )
   (find-file (cdr (assoc openCode xah-filelist))))
 ;
-;
-;;;;; Crear backup del buffer abierto. El nombre será del tipo:
-;;;;; nombre~<date>~ en el mismo directorio. Si existe, se sobreescribe
-;; La drecerqa de teclat és: C-c v
+;;; Crear backup del buffer abierto. El nombre será del tipo:
+;;; nombre~<date>~ en el mismo directorio. Si existe, se sobreescribe
+;;; La drecerqa de teclat és: C-c v
 (defun crear-backup ()
   (interactive)
   (if (buffer-file-name)
@@ -161,8 +158,7 @@ abrirlos de forma rápida.")
     (user-error "El buffer no es un archivo.")
     ))
 ;
-;
-;;;;; Copiar la ruta del archivo del presente buffer (Pegarla con C-x y):
+;;; Copiar la ruta del archivo del presente buffer (Pegarla con C-x y):
 (defun copy-file-path (&optional φdir-path-only-p)
   "Copy the current buffer's file path or dired path to `kill-ring'.
 If `universal-argument' is called, copy only the dir path."
@@ -177,8 +173,7 @@ If `universal-argument' is called, copy only the dir path."
        (file-name-directory fPath))))
   (message "Ruta del archivo copiada."))
 ;
-;
-;;;;;; Varias funciones para pasar buffers a pdf.
+;;; Varias funciones para pasar buffers a pdf.
 (defun pdf-save-buffer (quiet filename)
     "Save buffer as a pdf file.
 With prefix arg (C-u), display of output is suppressed.
@@ -242,7 +237,6 @@ With prefix arg (C-u), display of output is suppressed.
     (if (not quiet) (find-file filename))
     )
 ;
-;
 ;;; Función para insertar la fecha:
 (defun insert-date ()
   "Inserta dia semana, fecha dd-mm-yyyy y hora, minutos y segundos"
@@ -252,7 +246,6 @@ With prefix arg (C-u), display of output is suppressed.
     )
   (insert (format-time-string "%a-%x--%A")))
 ;
-;
 ;;; Función para copiar una linea al portapapeles:
 (defun copy-line (arg)
   "Copiar linea al portapapeles"
@@ -260,7 +253,6 @@ With prefix arg (C-u), display of output is suppressed.
   (kill-ring-save (line-beginning-position)
 		  (line-beginning-position (+ 1 arg)))
   (message "%d line%s copied" arg (if (= 1 arg) "" "s")))
-;
 ;
 ;;; Apps externas:
 ;;; En dired, Para arrancar apps externas clicando F8 o M-x external-app:
@@ -274,7 +266,6 @@ With prefix arg (C-u), display of output is suppressed.
   "Show current dir"
   (interactive)
   (cond ((let ((process-connection-type nil)) (start-process "" nil "nautilus" ".")))))
-;
 ;
 ;;; En dired, función para mostrar/esconder archivos ocultos clicando C-c w
 (defun dired-dotfiles-toggle ()
@@ -290,9 +281,8 @@ With prefix arg (C-u), display of output is suppressed.
       (progn (revert-buffer) ; otherwise just revert to re-show
                     (set (make-local-variable 'dired-dotfiles-show-p) t)))))
 ;
-;
 ;;; Copi/paste emacs --> X i X --> emacs
-;; http://hugoheden.wordpress.com/2009/03/08/copypaste-with-emacs-in-terminal/
+;;; http://hugoheden.wordpress.com/2009/03/08/copypaste-with-emacs-in-terminal/
 (setq x-select-enable-clipboard t)
 (unless window-system
  (when (getenv "DISPLAY")
@@ -307,7 +297,6 @@ With prefix arg (C-u), display of output is suppressed.
     (setq interprogram-cut-function 'xsel-cut-function)
     (setq interprogram-paste-function 'xsel-paste-function)))
 ;
-;
 ;;; Algunas funciones de wget:
 (defun wget-hide ()
   "Hide wget download information."
@@ -321,9 +310,8 @@ With prefix arg (C-u), display of output is suppressed.
   (setq wget-hide-status nil))
 (provide 'wget-extension)
 ;
-;
 ;;; Mover lineas arriba o abajo. Por defecto sin especificar cantidad, una.
-;;  C-u 4 M-x move-line-down (4 lineas abajo)
+;;;  C-u 4 M-x move-line-down (4 lineas abajo)
 (defun move-line (n)
   "Mover la linea arriba o abajo N lineas."
   (interactive "p")
@@ -341,20 +329,19 @@ With prefix arg (C-u), display of output is suppressed.
       ;; Restaurar linea y columna original
       (forward-line -1)
       (forward-char col))))
-
+;
 (defun move-line-up (n)
   "Mover linea N lineas arriba."
   (interactive "p")
   (move-line (if (null n) -1 (- n))))
-
+;
 (defun move-line-down (n)
   "Mover linea N lineas bajo."
   (interactive "p")
     (move-line (if (null n) 1 n)))
 ;
-;
 ;;; Buscar en la página de google del navegador por defecto
-;;  la palabra sobra la que esté el cursor:
+;;;  la palabra sobra la que esté el cursor:
 (defun google-define ()
   "Buscar en google la palabra bajo el cursor."
   (interactive)
@@ -362,22 +349,19 @@ With prefix arg (C-u), display of output is suppressed.
 (concat "http://www.google.com.pe/search?hl=en&q=define%3A"
                        (thing-at-point 'word))))
 ;
-;
-;; Función para abrir directamente el tractatus con C-t:
+;;; Función para abrir directamente el tractatus con C-t:
 (defun tractatus ()
   "Obrir el tractatus `~/tractatus/tractatus.txt'."
     (interactive)
       (find-file "~/tractatus/tractatus.txt"))
 ;
-;
-;; Abrir mi .bashrc:
+;;; Abrir mi .bashrc:
 (defun bashrc ()
   "Abrir `~/.bashrc'."
   (interactive)
     (find-file "~/.bashrc"))
 ;
-;
-;; Función para abrir archivos con privilegios de administrador
+;;; Función para abrir archivos con privilegios de administrador
 (defun sudo-open-file (file)
   "Abrir archivo com privilegios de root"
   (interactive "FFind file: ")
@@ -386,8 +370,7 @@ With prefix arg (C-u), display of output is suppressed.
     (concat "/sudo::"
             (expand-file-name file)))))
 ;
-;
-;; Guardar un completo historial de todo lo que ocurre en la sesión:
+;;; Guardar un completo historial de todo lo que ocurre en la sesión:
 (setq savehist-file "~/.emacs.d/savehist")
 (savehist-mode 1)
 (setq history-length t)
@@ -397,7 +380,6 @@ With prefix arg (C-u), display of output is suppressed.
       '(kill-ring
         search-ring
                 regexp-search-ring))
-;
 ;
 ;;;;;;;;;;;;;;;;; PRUEBAS A PARTIR DE AQUÍ;;;;;;;;;;;;;;;
 ;

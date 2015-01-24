@@ -11,7 +11,7 @@
 ;; =--------------------------------------------------------------=
 ;
 ;
-;;;;;; Ajustes generales;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;; Ajustes generales;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ;
 ;;; Algunqs cosas que podemos implementar en el arranque:
@@ -21,15 +21,7 @@
 ;(rename-buffer "shell-1")     ;; Enumerarla como "shell-1"
 ;(other-window 1)              ;; Ir nuevamente al primer panel
 ;
-;
-;; Emacs como servidor:
-(require 'server)
-(unless (server-running-p)
-  (server-start))
-;
-;(message "***** Entrando en mi archivo .emacs *****")
-;
-;;; No mostrar mensajes de inicio. Incompatible con mensaje anterior
+;; Sin mensaje de bienvenida:
 (setq inhibit-startup-message t)
 ;
 ;;; tipos de sistema
@@ -66,16 +58,16 @@
 ;;; ejecutar con C-c e
 (setq after-save-hook (quote (executable-make-buffer-file-executable-if-script-p)))
 ;
-;; Ver depuración de scripts de forma rápida:
+;;; Ver depuración de scripts de forma rápida:
 ;;; quickrum (https://raw.github.com/syohex/emacs-quickrun/master/quickrun.el)
 (require 'quickrun)
 ;
 ;;; No hacer copias de seguredad ni crear archvoss #auto-save#
 (setq make-backup-files nil)
 (setq auto-save-default nil)
-;; Si quisiéramos copias de seguridad cada 2 minutos:
+;;; Si quisiéramos copias de seguridad cada 2 minutos:
 ;(setq auto-save-timeout 120)
-;; Si quisiéramos copias de seguridad cada 20 modficaciones:
+;;; Si quisiéramos copias de seguridad cada 20 modficaciones:
 ;(setq auto-save-interval 20)
 ;
 ;;; guardar la sessión al cerrar emacs i restaurarla
@@ -88,7 +80,7 @@
 ;;; Esconder las contraseñas cuando se teclee:
 (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
 ;
-;;; Descomprimir archivos:
+;;; Abre archivos comprimidos con gzip y bzip2:
 (auto-compression-mode t)
 ;
 ;;; Reemplazar "yes" y "no" para "y" y "n" en el prompt
@@ -96,6 +88,7 @@
 ;
 ;;; Pedir confirmación para salir de emacs:
 ;(setq confirm-kill-emacs 'yes-or-no-p)
+;
 ;;; Realzar la línea del foco. Atajo para activa/desactivar: C-c i
 ;;; y hacerlo con fondo azul:
 (global-hl-line-mode 0)
@@ -106,8 +99,7 @@
 ;(display-battery-mode 1)
 ;
 ;;; reloj con formato 24 horas
-;; Mostrar fecha y hora
-;'(display-time-format "%a %x")
+;;; Mostrar fecha y hora
 (setq display-time-day-and-date t
       display-time-24hr-format t)
 (display-time)
@@ -172,25 +164,18 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 (setq message-log-max t)
 ;
 ;;; Cuando sea necesario, expandir verticalmente la ventana del minibuffer
-;;  para contener el texto que se pone:
+;;; para contener el texto que se pone:
 (setq resize-mini-windows t)
+;
 ;;; alias para para eval-buffer:
 (defalias 'eb 'eval-buffer)
 ;
 ;;; Formatear las línias de un texto a 70 espacios
-;;  (M-x auto-fill-mode y después clicar ESP) Para hacerlo permanente:
+;;;  (M-x auto-fill-mode) Para hacerlo permanente:
 ;(add-hook 'text-mode-hook 'turn-on-auto-fill)
 ;
 ;;; Mostrar la línea de modo al lado del número de línia:
 (column-number-mode t)
-;
-;
-;;; Permitir seleccionar texto y pasarlo a minúsculas
-;;  Sin pedir confirmación (M-x downcase-region):
-(put 'downcase-region 'disabled nil)
-;;; Permitir seleccionar texto y pasarlo a mayúsculas
-;;  Sin pedir confirmación (M-x upcase-region):
-(put 'upcase-region 'disabled nil)
 ;
 ;
 ;;; Si tenemos un archivo sensible (contraseñas, códigos...) podemos
@@ -199,22 +184,23 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 (if (file-exists-p "~/.emacs.secrets")
         (load-file "~/.emacs.secrets"))
 ;
-;
 ;;; Preservar enlaces duros del archivo que se está editando.
 ;;; especialmente importante si se edita archivos de sistema:
 (setq backup-by-copying-when-linked t)
-;
 ;
 ;;; Preservar el propietario y el grupo del archivo que se está editando.
 ;;; especialmente importante si se edita archivos como root:
 (setq backup-by-copying-when-mismatch t)
 ;
-;
 ;;; Introducir el depurador cada vez que se encuentre un error:
 ;(setq debug-on-error t)
 ;
+;;; Que al abrir un pdf se active el doc-view-mode:
+(setq auto-mode-alist
+      '(("\\.pdf$" . doc-view-mode)))
 ;
-;;;;;;;;; Keys;;;;;;;;;;;;;;
+;
+;;;;;;;;;;;;;;;;;;;;;;;;; Keys;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Comentar trozos de codigo:
 (global-set-key (kbd "C-c c") 'comment-region)
 ;;; Descomentar trozos de codigo:
@@ -271,12 +257,12 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 (global-set-key (kbd "<f8>") 'external-app)
 ;;; lanzar blog de notas con F9:
 (global-set-key (kbd "<f9>") 'remember)
-;;;;;;;;;;;; Lanzar el buffer scratch con C-c s:
+;;; Lanzar el buffer scratch con C-c s:
 (global-set-key (kbd "C-c s")
   (lambda()(interactive)(switch-to-buffer "*scratch*")))
 ;;; Abrir el tractatus
 (global-set-key (kbd "C-t") 'tractatus)
-;;;;;;;;;;;; llançar el directori .emacs.d con C-c d:
+;;; llançar el directori .emacs.d con C-c d:
 (global-set-key (kbd "C-c 1")
   (lambda()(interactive)(find-file "~/.emacs.d")))
 ;;; Reabrir alguno de los últimos 25 buffer abiertos,
@@ -298,15 +284,13 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 (add-to-list 'load-path "~/.emacs.d/remember")
 (require 'remember)
 ;
-;
 ;;; Multi-term
 ;;; Abrir con M-x multi-term o con el atajo (C-c t o C-c T). Descargar de:
 ;;; http://www.emacswiki.org/emacs/download/multi-term.el
 (autoload 'multi-term "multi-term" nil t)
 (autoload 'multi-term-next "multi-term" nil t)
-;; que use bash
+;;; que use bash
 (setq multi-term-program "/bin/bash")
-;
 ;
 ;;; package.el (emacs24)
 ;;; (http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el)
@@ -319,7 +303,6 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
                          ("marmalade" . "http://marmalade-repo.org/packages/")
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
 ;
-;
 ;;; Referente al paquete ido:
 (require 'ido)
 ;(setq ido-enable-flex-matching t)
@@ -329,22 +312,19 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 (setq ido-ignore-buffers '("^ " "*Completions*" "*Shell Command Output*"
                            "*Messages*" "Async Shell Command" "*scratch*"
                            "*tramp*"))
-; Ver el listado vertical cuando se pulsa C-x b
-; M-x package-install y entrar:   ido-vertical-mode el paquete está a MELPA
+;;; Ver el listado vertical cuando se pulsa C-x b
+;;; M-x package-install y entrar:   ido-vertical-mode el paquete está a MELPA
 ;(require 'ido-vertical-mode)
 ;(ido-mode 1)
 ;(ido-vertical-mode 1)
 ;
-;
-;;; Navegador
-; Navegador w3m:
+;;; Navegador w3m:
 (setq w3m-home-page "http://google.es"
 w3m-default-display-inline-images t
 w3m-display-inline-image t
 w3m-resize-images t
 w3m-use-cookies t
 w3m-cookie-accept-bad-cookies t)
-;
 ;
 ;;; ssh
 ;;; Acceso ssh (C-x C-f /ssh:usuario@IP:/home/usuario):
@@ -353,7 +333,6 @@ w3m-cookie-accept-bad-cookies t)
 ;;; activar variables para ver salida de problemas con tramp
 (setq tramp-debug-buffer t)
 (setq tramp-verbose 10)
-;
 ;
 ;;; sudo:
 ;;; Forma de uso [C-x C-f /sudo::/etc/hosts]
@@ -378,13 +357,12 @@ w3m-cookie-accept-bad-cookies t)
 ;;; mensaje de bienvenida al entrar a la eshell:
 (setq eshell-banner-message "\n... entrant a  emacs shell...\n\n")
 ;
-;
 ;;; Colores:
 ;;; Poner esquemas de colores
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/color-theme/"))
 (require 'color-theme)
 (color-theme-initialize)
-;; Esquema de color escogido:
+;;; Esquema de color escogido:
 ;(color-theme-charcoal-black)
 ;(color-theme-calm-forest)
 ;(color-theme-lethe)
@@ -392,41 +370,34 @@ w3m-cookie-accept-bad-cookies t)
 ;(color-theme-taming-mr-arneson)
 ;(color-theme-jsc-dark)
 ;
-;
-;;;;; Reabrir algún buffer cerrado anteriormente
-;; El atajo de teclado es C-c 2
+;;; Reabrir algún buffer cerrado anteriormente
+;;; El atajo de teclado es C-c 2
 (require 'recentf)
 (recentf-mode 1)
 (setq recentf-max-saved-items 200)
 (setq recentf-max-menu-items 35)
-;; Limpiar listado al inicio si se visitan remotos:
-; (setq recentf-auto-cleanup 'never)
+;;; Limpiar listado al inicio si se visitan remotos:
+;(setq recentf-auto-cleanup 'never)
 ;
-;
-;;;; Activar tomar descansos cada determinado periodo de tiempo:
-;;   type-break-mode activa/desactiva la extensión
+;;; Activar tomar descansos cada determinado periodo de tiempo:
+;;; type-break-mode activa/desactiva la extensión
 (require 'type-break)
-;; Frecuencia para tomar descansos en segundos (1 hora) :
+;;; Frecuencia para tomar descansos en segundos (1 hora) :
 (setq type-break-interval (* 60 60))
-; Para cada frecuencia anterior parar 5 minutos:
+;;; Para cada frecuencia anterior parar 5 minutos:
 (setq type-break-good-rest-interval (* 60 5))
 ;
-;
-
-;;; Abrir con apps externas con "intro" (~/.emacs.d/openwith.el)
+;;; Abrir con apps externas con "intro" (~/.emacs.d/lisp/openwith.el)
 (require 'openwith)
 (openwith-mode t)
 (require 'mm-util)
 (add-to-list 'mm-inhibit-file-name-handlers 'openwith-file-handler)
 ;
-;
 ;;; Modo markdown
 (add-to-list 'load-path "~/.emacs.d/lisp/markdown-mode")
 (autoload 'markdown-mode "markdown-mode" t)
-; "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-;
 ;
 ;;; emacs-wget (http://www.filewatcher.com/m/emacs-wget.tbz.29-1.html)
 ;;; Las descargas a ~/download
@@ -435,38 +406,35 @@ w3m-cookie-accept-bad-cookies t)
 (defvar wget-hide-status t
   "Default hide wget download window.")
 ;
-;
-;;;;;; Modo latex
-;; Que cuando se cargue el mode mayor LaTeX se active automáticament RefTeX.
+;;; Modo latex
+;;; Que cuando se cargue el mode mayor LaTeX se active automáticament RefTeX.
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-;; Que AUCTeX delegue a RefTeX lo relativo a la generación de etiquetas.
+;;; Que AUCTeX delegue a RefTeX lo relativo a la generación de etiquetas.
 (setq reftex-plug-into-AUCTeX t)
-;; Que AUCTeX detecte el uso de include o input
+;;; Que AUCTeX detecte el uso de include o input
 (setq-default TeX-master nil)
-;; Guardar automáticamente la compilación:
+;;; Guardar automáticamente la compilación:
 ;(setq TeX-save-query nil)
-;; Analizar el documento al guardar:
+;;; Analizar el documento al guardar:
 (setq TeX-auto-save t)
-;; Analizar el documento al cargar:
+;;; Analizar el documento al cargar:
 (setq TeX-parse-self t)
-;; Para que los .tex se abran en latex-mode:
+;;; Para que los .tex se abran en latex-mode:
 (add-to-list 'auto-mode-alist '("\\.tex$" . latex-mode))
-;; Corregir los comentarios mientras se escribe. No las etiquetas ni las variables:
-;; M-$ para ver opciones "i" para incorporar al diccionario.
+;;; Corregir los comentarios mientras se escribe. No las etiquetas ni las variables:
+;;; M-$ para ver opciones "i" para incorporar al diccionario.
 (setq flyspell-mode nil)
-;
 ;
 ;;; Imprimir
 (setq lpr-command "enscript")
-;; list of strings to pass as extra options for the printer program
+;;; list of strings to pass as extra options for the printer program
 ;(setq lpr-switches (list "--font=Courier10"
 ;                         "--no-header"
 ;                         "--encoding=pslatin1"))
 ;                   (format "--header=%s" (buffer-name))))
 (setq printer-name "psc-1100-series")
 ;
-;
-;;;;;; Escuchar música con emms:
+;;; Escuchar música con emms:
 (add-to-list 'load-path "~/.emacs.d/lips/")
 (require 'emms)
 (emms-standard)
@@ -482,7 +450,6 @@ w3m-cookie-accept-bad-cookies t)
 		".rm" ".rmvb" ".mp4" ".flac" ".vob" ".m4a" ".flv" ".ogv" ".pls"))
         "mplayer" "-slave" "-quiet" "-really-quiet" "-fullscreen")
 ;
-;
 ;;; Limpiar con antiword ficheros .doc (apt-get install antiword)
 ;;; http://www.emacswiki.org/emacs/download/no-word.el
 (autoload 'no-word "no-word" "word to txt")
@@ -491,3 +458,6 @@ w3m-cookie-accept-bad-cookies t)
 ;
 ;;;;;;;;; FIN PRIMERA PARTE... CONTINUA EN ~/.gnu-emacs ;;;;;;;;;;;
 ;
+;; Pour que la recherche soit visible.
+(setq-default search-highlight t)
+(copy-face 'highlight 'isearch)
