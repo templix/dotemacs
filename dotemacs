@@ -80,7 +80,7 @@
 ;;; Esconder las contraseñas cuando se teclee:
 (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
 ;
-;;; Abre archivos comprimidos con gzip y bzip2:
+;;; Abrir archivos comprimidos con gzip y bzip2:
 (auto-compression-mode t)
 ;
 ;;; Reemplazar "yes" y "no" para "y" y "n" en el prompt
@@ -195,9 +195,17 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;;; Introducir el depurador cada vez que se encuentre un error:
 ;(setq debug-on-error t)
 ;
-;;; Que al abrir un pdf se active el doc-view-mode:
-(setq auto-mode-alist
-      '(("\\.pdf$" . doc-view-mode)))
+;;; Colocar marcas visibles en un buffer. Ejemplo:
+;;; M-x bm-bookmark-line RET 235 (Marcarà la linea del cursor con el número
+;;; 235. Para ver las marcas M-x: bm-show-all. Suprimir:
+;;; M-x bm-remove-all-all-buffers o M-x bm-remove-all-current-buffer
+(add-to-list 'load-path "~/.emacs.d/lisp/bm")
+(require 'bm)
+;
+;
+;;; Esconder comentarios de un script. Para esconder; M-x hide/show-comments
+;;; Para mostrar: M-x hide/show-comments-toggle
+(require 'hide-comnt)
 ;
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;; Keys;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -458,6 +466,6 @@ w3m-cookie-accept-bad-cookies t)
 ;
 ;;;;;;;;; FIN PRIMERA PARTE... CONTINUA EN ~/.gnu-emacs ;;;;;;;;;;;
 ;
-;; Pour que la recherche soit visible.
-(setq-default search-highlight t)
-(copy-face 'highlight 'isearch)
+;; (require 'httpd)
+;; (setq httpd-root "~/http_public")
+;; (httpd-start)

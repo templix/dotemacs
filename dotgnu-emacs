@@ -385,3 +385,6 @@ With prefix arg (C-u), display of output is suppressed.
 ;
 ;(setq dired-auto-revert-buffer t)
 ;
+;; (require 'httpd)
+;; (setq httpd-root "~/http_public")
+;; (httpd-start)
