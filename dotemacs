@@ -205,6 +205,7 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;
 ;;; Esconder comentarios de un script. Para esconder; M-x hide/show-comments
 ;;; Para mostrar: M-x hide/show-comments-toggle
+(add-to-list 'load-path "~/.emacs.d/elpa/hide-comnt")
 (require 'hide-comnt)
 ;
 ;
@@ -466,6 +467,3 @@ w3m-cookie-accept-bad-cookies t)
 ;
 ;;;;;;;;; FIN PRIMERA PARTE... CONTINUA EN ~/.gnu-emacs ;;;;;;;;;;;
 ;
-;; (require 'httpd)
-;; (setq httpd-root "~/http_public")
-;; (httpd-start)
