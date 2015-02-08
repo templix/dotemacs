@@ -209,6 +209,39 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 (require 'hide-comnt)
 ;
 ;
+;;; Guardar un completo historial de todo lo que ocurre en la sesión:
+(setq savehist-file "~/.emacs.d/savehist")
+(savehist-mode 1)
+(setq history-length t)
+(setq history-delete-duplicates t)
+(setq savehist-save-minibuffer-history 1)
+(setq savehist-additional-variables
+      '(kill-ring
+        search-ring
+                regexp-search-ring))
+;
+;
+;;; Para conocer dia y hora actual en distintos puntos del globo.
+;;; M-x display-time-world
+(setq display-time-world-list '(("Europe/Madrid" "Madrid")
+                                ("Europe/London" "Londres")
+		                ("America/New_York" "New York")
+                                ("Australia/Melbourne" "Melbourne")
+                                ("America/Buenos_Aires" "Buenos Aires")
+                                ("Asia/Tokyo" "Tokyo")))
+;
+;
+;;; Para conocer el tiempo en determinada ciudad, en este caso
+;;; Figueres (España). M-x weather-metno-forecast
+;;; Descargar de: https://github.com/ruediger/weather-metno-el
+(add-to-list 'load-path "~/.emacs.d/weather-metno")
+(require 'weather-metno)
+(setq weather-metno-location-name "Figueres, Spain"
+      weather-metno-location-latitude 42.27
+            weather-metno-location-longitude 2.96)
+;
+;
+;
 ;;;;;;;;;;;;;;;;;;;;;;;;; Keys;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Comentar trozos de codigo:
 (global-set-key (kbd "C-c c") 'comment-region)
