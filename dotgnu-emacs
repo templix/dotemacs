@@ -1,6 +1,15 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;; CONTINUACIÓN DE .emacs ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
+;;; Añadir automáticamente paréntesis, llave y comillas
+;;; de cierre al insertar la de apertura.
+(setq skeleton-pair t)
+(global-set-key "[" 'skeleton-pair-insert-maybe)
+(global-set-key "(" 'skeleton-pair-insert-maybe)
+(global-set-key "{" 'skeleton-pair-insert-maybe)
+(global-set-key "'" 'skeleton-pair-insert-maybe)
+;
+;
 ;;; Plantillas skeleton ;;;;;;;;;;;;;;;;
 (define-skeleton logo
   "Cabecera (C-c l)"
@@ -370,25 +379,7 @@ With prefix arg (C-u), display of output is suppressed.
     (concat "/sudo::"
             (expand-file-name file)))))
 ;
-;;; Guardar un completo historial de todo lo que ocurre en la sesión:
-(setq savehist-file "~/.emacs.d/savehist")
-(savehist-mode 1)
-(setq history-length t)
-(setq history-delete-duplicates t)
-(setq savehist-save-minibuffer-history 1)
-(setq savehist-additional-variables
-      '(kill-ring
-        search-ring
-                regexp-search-ring))
 ;
-;;; Para conocer dia y hora actual en distintos puntos del globo.
-;;; M-x display-time-world
-(setq display-time-world-list '(("Europe/Madrid" "Madrid")
-                                ("Europe/London" "Londres")
-		                ("America/New_York" "New York")
-                                ("Australia/Melbourne" "Melbourne")
-                                ("America/Buenos_Aires" "Buenos Aires")
-                                ("Asia/Tokyo" "Tokyo")))
 ;
 ;;;;;;;;;;;;;;;;; PRUEBAS A PARTIR DE AQUÍ;;;;;;;;;;;;;;;
 ;

@@ -238,7 +238,7 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 (require 'weather-metno)
 (setq weather-metno-location-name "Figueres, Spain"
       weather-metno-location-latitude 42.27
-            weather-metno-location-longitude 2.96)
+      weather-metno-location-longitude 2.96)
 ;
 ;
 ;
@@ -500,3 +500,9 @@ w3m-cookie-accept-bad-cookies t)
 ;
 ;;;;;;;;; FIN PRIMERA PARTE... CONTINUA EN ~/.gnu-emacs ;;;;;;;;;;;
 ;
+(setq skeleton-pair t)
+(global-set-key "[" 'skeleton-pair-insert-maybe)
+(global-set-key "(" 'skeleton-pair-insert-maybe)
+(global-set-key "{" 'skeleton-pair-insert-maybe)
+(global-set-key "'" 'skeleton-pair-insert-maybe)
+(global-set-key "\"" 'skeleton-pair-insert-maybe)
