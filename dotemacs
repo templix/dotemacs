@@ -241,6 +241,13 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
       weather-metno-location-longitude 2.96)
 ;
 ;
+;;; asciidoc
+(autoload 'doc-mode "doc-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.adoc$" . doc-mode))
+(add-hook 'doc-mode-hook
+ '(lambda ()
+  (turn-on-auto-fill)
+  (require 'asciidoc)))
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;; Keys;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Comentar trozos de codigo:
@@ -500,9 +507,3 @@ w3m-cookie-accept-bad-cookies t)
 ;
 ;;;;;;;;; FIN PRIMERA PARTE... CONTINUA EN ~/.gnu-emacs ;;;;;;;;;;;
 ;
-(setq skeleton-pair t)
-(global-set-key "[" 'skeleton-pair-insert-maybe)
-(global-set-key "(" 'skeleton-pair-insert-maybe)
-(global-set-key "{" 'skeleton-pair-insert-maybe)
-(global-set-key "'" 'skeleton-pair-insert-maybe)
-(global-set-key "\"" 'skeleton-pair-insert-maybe)

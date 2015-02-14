@@ -3,11 +3,11 @@
 ;;
 ;;; Añadir automáticamente paréntesis, llave y comillas
 ;;; de cierre al insertar la de apertura.
-(setq skeleton-pair t)
-(global-set-key "[" 'skeleton-pair-insert-maybe)
-(global-set-key "(" 'skeleton-pair-insert-maybe)
-(global-set-key "{" 'skeleton-pair-insert-maybe)
-(global-set-key "'" 'skeleton-pair-insert-maybe)
+;(setq skeleton-pair t)
+;(global-set-key "[" 'skeleton-pair-insert-maybe)
+;(global-set-key "(" 'skeleton-pair-insert-maybe)
+;(global-set-key "{" 'skeleton-pair-insert-maybe)
+;(global-set-key "'" 'skeleton-pair-insert-maybe)
 ;
 ;
 ;;; Plantillas skeleton ;;;;;;;;;;;;;;;;
