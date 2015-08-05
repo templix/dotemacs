@@ -1091,4 +1091,6 @@ y  nil si patch es un archivo"
      proc
      (concat "cd ~/Baixades && youtube-dl " str "\n"))))
 ;
-;;;;;;;;;;;;;;;; fin .gnu-emacs ;;;;;;;;;;;;;;;
+;;; Un simple monitor de sistema que aparece en el minibuffer:
+;(require 'symon)
+;
