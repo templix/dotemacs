@@ -1094,3 +1094,10 @@ y  nil si patch es un archivo"
 ;;; Un simple monitor de sistema que aparece en el minibuffer:
 ;(require 'symon)
 ;
+;;; Salvapantallas de emacs. Activado a losd 60 segundos de inactividad.
+;;; en debian precisa tener instalado el paquete xtrlock
+(require 'zone)
+(zone-when-idle 60)
+;;; Activar un salvapantallas concreto. Por defecto aleatorio.
+;(setq zone-programs [zone-pgm-drip-fretfully])
+;
