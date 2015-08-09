@@ -1101,3 +1101,33 @@ y  nil si patch es un archivo"
 ;;; Activar un salvapantallas concreto. Por defecto aleatorio.
 ;(setq zone-programs [zone-pgm-drip-fretfully])
 ;
+;;; Feeds. Actualizar con M-x elfeed-update
+(setq elfeed-feeds
+      '("http://www.genbeta.com/atom.xml"
+	"http://www.linux-party.com/backend.php"
+	"http://www.theinquirer.es/feed/atom"
+	"http://feeds.feedburner.com/Command-line-fu"
+	; más feeds
+	"http://systemadmin.es/feed"))
+;;; que se actualicen cada 30 minutos:
+;(setf url-queue-timeout 30)
+;
+(defun delete-buffer-and-file ()
+  "Eliminar el presente archivo y el buffer correspondiente."
+  (Interactive)
+  (Let ((filename (buffer-file-name))
+	(buffer (current-buffer))
+	(name (buffer-name)))
+    (if (not (and filename (file-exists-p filename)))
+	(error "El buffer '%s' no está siendo visitado..." name)
+      (when (yes-or-no-p "¿Está seguro de querer eliminar el archivo? ")
+	(delete-file filename)
+	(kill-buffer buffer)
+	(message "Archivo '%s' eliminado... " filename)))))
+;
+(defun insert-nmap ()
+  "Insertar en el cursor el escaneo de la red"
+  (interactive)
+  (shell-command-on-region (point) (point) "nmap 192.168.1.0/24" t)
+  (delete-backward-char 1))
+;
