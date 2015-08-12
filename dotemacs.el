@@ -31,6 +31,9 @@
 ;; Sin mensaje de bienvenida:
 (setq inhibit-startup-message t)
 ;
+;; Sin mensaje en el buffer scratch:
+; initial-scratch-message nil
+;
 ;;; O mostrar un mensaje en el minibuffer
 ;(defun display-startup-echo-area-message ()
 ;    (message "Activado emacs... ¡el editor de los dioses!"))
