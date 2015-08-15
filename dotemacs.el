@@ -1131,6 +1131,7 @@ y  nil si patch es un archivo"
 	(kill-buffer buffer)
 	(message "Archivo '%s' eliminado... " filename)))))
 ;
+;;; a modo de ejemplo, insertar una salida de un comando con una función:
 (defun insert-nmap ()
   "Insertar en el cursor el escaneo de la red"
   (interactive)
