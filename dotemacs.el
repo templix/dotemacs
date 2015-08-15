@@ -323,6 +323,8 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 (global-set-key (kbd "C-c p") 'pdf-save-buffer)
 ;;; Esconder/mostrar archivos ocultos:
 (global-set-key (kbd "C-c w") 'dired-dotfiles-toggle)
+;;; Lanzar magit status
+(global-set-key (kbd "C-c C-g") 'magit-status)
 ;;; Entrar terminal ansi-ter al pulsar F5:
 (global-set-key (kbd "<f5>") '(lambda ()(interactive)(ansi-term "/bin/bash")))
 ;;; No cortar la palabra al final de la línia, clicando F6:
@@ -1138,3 +1140,5 @@ y  nil si patch es un archivo"
   (shell-command-on-region (point) (point) "nmap 192.168.1.0/24" t)
   (delete-backward-char 1))
 ;
+;;; Gestión de los repositorios de github (C-c C-g activa magit-status)
+(require 'magit)
