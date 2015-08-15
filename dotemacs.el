@@ -1104,6 +1104,9 @@ y  nil si patch es un archivo"
 ;;; Activar un salvapantallas concreto. Por defecto aleatorio.
 ;(setq zone-programs [zone-pgm-drip-fretfully])
 ;
+;; Twitter
+(add-hook 'twittering-mode-hook (lambda () (visual-line-mode 1)))
+;
 ;;; Feeds. Actualizar con M-x elfeed-update
 (setq elfeed-feeds
       '("http://www.genbeta.com/atom.xml"
