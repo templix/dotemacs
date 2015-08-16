@@ -456,6 +456,9 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;(color-theme-oswald)
 ;(color-theme-taming-mr-arneson)
 ;(color-theme-jsc-dark)
+;;; Al iniciar emacs, abrir el selector de colores para escoger el tema:
+; (load-library "color-theme")
+;     (color-theme-select)
 ;
 ;;; Reabrir algún buffer cerrado anteriormente
 ;;; El atajo de teclado es C-c 2
