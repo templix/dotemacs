@@ -459,6 +459,8 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;;; Al iniciar emacs, abrir el selector de colores para escoger el tema:
 ; (load-library "color-theme")
 ;     (color-theme-select)
+;;; Si nos gusta determinada combinación pero la queremos invertida:
+;(invert-face 'default)
 ;
 ;;; Reabrir algún buffer cerrado anteriormente
 ;;; El atajo de teclado es C-c 2
