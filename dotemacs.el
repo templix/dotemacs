@@ -34,6 +34,35 @@
 ;; Sin mensaje en el buffer scratch:
 ; initial-scratch-message nil
 ;
+;;; package.el (emacs24)
+;;; (http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el)
+;;; Paquetes listos para instalar (tipo apt-get). M-x package-list-packages (update) M-x list-packages (listar)
+;;; Para activar el modo: M-x package-menu-mode
+;(add-to-list 'load-path (expand-file-name "~/.emacs.d/package.el"))
+(require 'package)
+(package-initialize)
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+(require 'cl)
+;
+(defvar my-packages
+; Listado de paquetes con C-h v package-activated-list
+  '(anti-zenburn-theme
+    async
+    auctex
+    auto-complete
+    chess
+    color-theme
+    color-theme-buffer-local
+    dired-details
+    elfeed
+    elfeed-web
+    emms
+;	... (más paquetes)
+    )
+    "Listado de paquetes que han de estar instalados o en caso negativo los instala.")
+;
 ;;; O mostrar un mensaje en el minibuffer
 ;(defun display-startup-echo-area-message ()
 ;    (message "Activado emacs... ¡el editor de los dioses!"))
@@ -379,17 +408,6 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 (autoload 'multi-term-next "multi-term" nil t)
 ;;; que use bash
 (setq multi-term-program "/bin/bash")
-;
-;;; package.el (emacs24)
-;;; (http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el)
-;;; Paquetes listos para instalar (tipo apt-get). M-x package-list-packages (update) M-x list-packages (listar)
-;;; Para activar el modo: M-x package-menu-mode
-;(add-to-list 'load-path (expand-file-name "~/.emacs.d/package.el"))
-(require 'package)
-(package-initialize)
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
 ;
 ;;; Referente al paquete ido:
 (require 'ido)
@@ -1147,3 +1165,6 @@ y  nil si patch es un archivo"
 ;
 ;;; Gestión de los repositorios de github (C-c C-g activa magit-status)
 (require 'magit)
+;
+;;; Si un archivo no existe nos pedirá confirmación:
+;(setq confirm-nonexistent-file-or-buffer t)
