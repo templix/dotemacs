@@ -640,6 +640,12 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 (with-eval-after-load 'lunar
     (setq lunar-phase-names '("Nueva" "Creciente" "Llena" "menguante")))
 ;
+;;; screen (M-x escreen-create-screen)
+;;; C-x escreen-menu (menú screen) C-\ p (ir al siguiente screen)
+;;; C-\ n (ir al anterior) C-\ k (matar un screen)
+;(require 'escreen)
+;(escreen-install)
+;
 ;;; Añadir automáticamente paréntesis, llave y comillas
 ;;; de cierre al insertar la de apertura.
 ;(setq skeleton-pair t)
@@ -1149,7 +1155,11 @@ y  nil si patch es un archivo"
 ;;; Activar un salvapantallas concreto. Por defecto aleatorio.
 ;(setq zone-programs [zone-pgm-drip-fretfully])
 ;
-;; Twitter
+;;; Twitter
+;;; activar iconos (sin efecto en -nw o -nox):
+;(setq twittering-icon-mode t)
+;;; Proteger la aplicación con un pass maestro:
+;(setq twittering-use-master-password t)
 (add-hook 'twittering-mode-hook (lambda () (visual-line-mode 1)))
 ;
 ;;; Feeds. Actualizar con M-x elfeed-update
@@ -1213,4 +1223,19 @@ y  nil si patch es un archivo"
   (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))
     (find-file tramp-file-name)))
 ;
+(defun ddg-search (text)
+  "Buscar en firefox a partir de emacs un texto."
+  (interactive "sDDG: ")
+  (browse-url-firefox
+   (concat "https://duckduckgo.com/?q="
+		              (replace-regexp-in-string " " "+" text))))
+;
+(defun ddg-wikipedia (text)
+  "Search DuckDuckGo from Emacs."
+  (interactive "sWikipedia: ")
+  (browse-url-firefox
+   (concat "https://duckduckgo.com/?q=!wikipedia+"
+                      (replace-regexp-in-string " " "+" text))))
+;
 ;;;;;;;;;;;;;;;; end file .emacs ;;;;;;;;;;;;;;;;;;;;;;;
+;
