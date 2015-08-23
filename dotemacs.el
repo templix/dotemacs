@@ -1181,7 +1181,7 @@ y  nil si patch es un archivo"
 ;;; Gestión de los repositorios de github (C-c C-g activa magit-status)
 (require 'magit)
 ;
-;;; Si se pretende abrir un archivo que no existe nos pedirá confirmación:
+;;; Si se pretende abrir un archivo que no existe nos pedirá confirmación para crearlo:
 ;(setq confirm-nonexistent-file-or-buffer t)
 ;
 ;;; tipos de sistema
