@@ -635,6 +635,10 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 (require 'google-this)
 (google-this-mode t)
 ;
+;;; fases de la luna. C-x lunar-phases
+(with-eval-after-load 'lunar
+    (setq lunar-phase-names '("Nueva" "Creciente" "Llena" "menguante")))
+;
 ;;; Añadir automáticamente paréntesis, llave y comillas
 ;;; de cierre al insertar la de apertura.
 ;(setq skeleton-pair t)
