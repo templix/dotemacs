@@ -435,13 +435,14 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;
 ;;; Referente al paquete ido:
 (require 'ido)
-;(setq ido-enable-flex-matching t)
 ;(setq ido-everywhere t)
 (ido-mode 'buffers)
 ;;; Ignorar determinados buffers para que no salgan al pulsar C-x b
 (setq ido-ignore-buffers '("^ " "*Completions*" "*Shell Command Output*"
                            "*Messages*" "Async Shell Command" "*scratch*"
                            "*tramp*"))
+;;; Prioridad al mostrar determinadas extensiones:
+(setq ido-file-extensions-order '(".emacs" ".sh" ".txt" ".el" ".tex" ))
 ;;; Ver el listado vertical cuando se pulsa C-x b
 ;;; M-x package-install y entrar:   ido-vertical-mode el paquete está a MELPA
 ;(require 'ido-vertical-mode)
