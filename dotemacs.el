@@ -56,6 +56,7 @@
     chess
     color-theme
     color-theme-buffer-local
+    browser-at-remote
     dash
     dired-details
     elfeed
