@@ -329,6 +329,14 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ; que se muestren en primer lugar los directorios:
 (setq dired-listing-switches "-aBhl --group-directories-first")
 ;
+;;; Abrir en el navegador github o bitbucket con M-x browse-at-remote
+;;; La primera vez, entrar en el directorio y lanzar:
+;;; git config --add browseAtRemote.type "github"
+(require 'browse-at-remote)
+;
+;
+;
+;
 ;;;;;;;;;;;;;;;;;;;;;;;;; Keys;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Comentar trozos de codigo:
 (global-set-key (kbd "C-c c") 'comment-region)
