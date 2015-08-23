@@ -38,7 +38,6 @@
 ;;; (http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el)
 ;;; Paquetes listos para instalar (tipo apt-get). M-x package-list-packages (update) M-x list-packages (listar)
 ;;; Para activar el modo: M-x package-menu-mode
-;(add-to-list 'load-path (expand-file-name "~/.emacs.d/package.el"))
 (require 'package)
 (package-initialize)
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -52,30 +51,59 @@
     async
     auctex
     auto-complete
+    auto-complete-auctex
+    center-text
     chess
     color-theme
     color-theme-buffer-local
+    dash
     dired-details
     elfeed
     elfeed-web
     emms
-;	... (más paquetes)
+    ss
+    git-commit
+    gntp
+    google-this
+    hc-zenburn-theme
+    hide-comnt
+    hide-region
+    httpd
+    hydra
+    latex-extra
+    latex-preview-pane
+    magit
+    magit-popup
+    markdown-mode
+    metaweblog
+    muse
+    nzenburn-theme
+    openwith
+    org
+    org2blog
+    pandoc-mode
+    popup
+    ps-ccrypt
+    quickrun
+    screenshot
+    simple-httpd
+    tao-theme
+    twittering-mode
+    weather-metno
+    wget
+    with-editor
+    xml-rpc
+    xterm-color
+    yasnippet
+    zenburn-theme
+    zone-matrix
+;... (más paquetes)
     )
     "Listado de paquetes que han de estar instalados o en caso negativo los instala.")
 ;
-;;; O mostrar un mensaje en el minibuffer
+;;; Mostrar un mensaje de bienvenida en el minibuffer
 ;(defun display-startup-echo-area-message ()
 ;    (message "Activado emacs... ¡el editor de los dioses!"))
-;
-;;; tipos de sistema
-(defun insert-system-type()
-(interactive)
-(insert (format "%s" system-type)))
-;
-;;; nombre del sistema
-(defun insert-system-name()
-(interactive)
-(insert (format "%s" system-name)))
 ;
 ;;; Dividir el buffer en dos ventanas que son una continuación de la otra:
 (follow-mode t)
@@ -86,10 +114,6 @@
 ;
 ;;; Iluminar los parentesis y las llaves por parejas:
 (show-paren-mode 1)
-;
-;;; Colocar los comentarios en la columna 0
-(defun comment-indent-default ()
-    (setq comment-column 0))
 ;
 ;;; Restablecer la posición del cursor al reabrir un archivo
 ;;; y activarlo para todos los buffers
@@ -439,15 +463,6 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;;; activar variables para ver salida de problemas con tramp
 (setq tramp-debug-buffer t)
 (setq tramp-verbose 10)
-;
-;;; sudo:
-;;; Forma de uso [C-x C-f /sudo::/etc/hosts]
-;;; C-x C-f /sudo:root@localhost:/etc/hosts o C-x sudo-find-file
-(defun sudo-find-file (file-name)
-  "Like find file, but opens the file as root."
-  (interactive "FSudo Find File: ")
-  (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))
-    (find-file tramp-file-name)))
 ;
 ;;; Ajustar el prompt de eshell
 ;;; Modificar el prompt para mostrar el directorio de trabajo
@@ -1166,5 +1181,28 @@ y  nil si patch es un archivo"
 ;;; Gestión de los repositorios de github (C-c C-g activa magit-status)
 (require 'magit)
 ;
-;;; Si un archivo no existe nos pedirá confirmación:
+;;; Si se pretende abrir un archivo que no existe nos pedirá confirmación:
 ;(setq confirm-nonexistent-file-or-buffer t)
+;
+;;; tipos de sistema
+(defun insert-system-type()
+(interactive)
+(insert (format "%s" system-type)))
+;
+;;; nombre del sistema
+(defun insert-system-name()
+(interactive)
+(insert (format "%s" system-name)))
+;
+;;; Colocar los comentarios en la columna 0
+(defun comment-indent-default ()
+    (setq comment-column 0))
+;
+;;; sudo:
+;;; Forma de uso [C-x C-f /sudo::/etc/hosts]
+;;; C-x C-f /sudo:root@localhost:/etc/hosts o C-x sudo-find-file
+(defun sudo-find-file (file-name)
+  "Like find file, but opens the file as root."
+  (interactive "FSudo Find File: ")
+  (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))
+    (find-file tramp-file-name)))
