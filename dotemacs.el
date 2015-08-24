@@ -655,6 +655,9 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;(require 'escreen)
 ;(escreen-install)
 ;
+;;; Que las regiones seleccionadas se vean con fondo blanco y letra negra:
+(set-face-attribute 'region nil :background "#666" :foreground "#ffffff")
+;
 ;;; Añadir automáticamente paréntesis, llave y comillas
 ;;; de cierre al insertar la de apertura.
 ;(setq skeleton-pair t)
