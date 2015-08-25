@@ -86,6 +86,7 @@
     popup
     ps-ccrypt
     quickrun
+    runner
     screenshot
     simple-httpd
     tao-theme
