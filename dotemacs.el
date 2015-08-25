@@ -329,6 +329,9 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;;; dired
 ; que se muestren en primer lugar los directorios:
 (setq dired-listing-switches "-aBhl --group-directories-first")
+;;; En dired, asociar extensiones a determinadas aplicaciones.
+;;; M-x runner-add-extension (C-c C-c para guardar la asociación))
+(require 'runner)
 ;
 ;;; Abrir en el navegador github o bitbucket con M-x browse-at-remote
 ;;; La primera vez, entrar en el directorio y lanzar:
