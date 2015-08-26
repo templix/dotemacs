@@ -348,6 +348,12 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;;; para otros lenguajes añadirlos en M-x customize-group RET insert-shebang
 (require 'insert-shebang)
 (add-hook 'find-file-hook 'insert-shebang)
+(custom-set-variables
+ ;; modificar la shell por defecto y excluir determinadas extensiones
+ '(insert-shebang-custom-headers (quote (("sh" . "#!/bin/bash"))))
+ '(insert-shebang-ignore-extensions (quote ("txt" "org" "el" "tex" "html"))))
+;
+;
 ;
 ;
 ;
