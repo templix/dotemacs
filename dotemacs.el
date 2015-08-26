@@ -339,6 +339,8 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;;; git config --add browseAtRemote.type "github"
 (require 'browse-at-remote)
 ;
+;;; Convertir textos a html.
+(require 'htmlize)
 ;
 ;
 ;
