@@ -72,6 +72,7 @@
     htmlize
     httpd
     hydra
+    insert-shebang
     latex-extra
     latex-preview-pane
     magit
@@ -342,6 +343,11 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;
 ;;; Convertir textos a html.
 (require 'htmlize)
+;
+;;; colocar shebang automaticamente al crear un script con extensión sh, perl y python
+;;; para otros lenguajes añadirlos en M-x customize-group RET insert-shebang
+(require 'insert-shebang)
+(add-hook 'find-file-hook 'insert-shebang)
 ;
 ;
 ;
