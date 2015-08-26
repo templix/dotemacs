@@ -69,6 +69,7 @@
     hc-zenburn-theme
     hide-comnt
     hide-region
+    htmlize
     httpd
     hydra
     latex-extra
