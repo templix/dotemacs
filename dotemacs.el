@@ -66,6 +66,7 @@
     git-commit
     gntp
     google-this
+    ;guru-mode
     hc-zenburn-theme
     hide-comnt
     hide-region
@@ -353,7 +354,11 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
  '(insert-shebang-custom-headers (quote (("sh" . "#!/bin/bash"))))
  '(insert-shebang-ignore-extensions (quote ("txt" "org" "el" "tex" "html"))))
 ;
-;
+;;; Para que cuando se usen teclas "incorrectas" (flechas, RePág...) emacs le diga
+;;; en el minibuffer las que tiene que usar (C-f, C-v...)
+;(guru-global-mode +1)
+;;; Si sólo quiere una advertencia:
+;(setq guru-warn-only t)
 ;
 ;
 ;
