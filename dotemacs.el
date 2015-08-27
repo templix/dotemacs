@@ -90,8 +90,10 @@
     ps-ccrypt
     quickrun
     runner
+    ;scratch-persist
     screenshot
     simple-httpd
+    ssh
     tao-theme
     twittering-mode
     weather-metno
@@ -102,7 +104,6 @@
     yasnippet
     zenburn-theme
     zone-matrix
-;... (más paquetes)
     )
     "Listado de paquetes que han de estar instalados o en caso negativo los instala.")
 ;
@@ -360,6 +361,9 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;;; Si sólo quiere una advertencia:
 ;(setq guru-warn-only t)
 ;
+;;; Si queremos guardar notas o trabajos en el buffer scratch y que estas
+;;; persistan aunque cerremos emacs:
+;(require 'scratch-persist)
 ;
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;; Keys;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -497,6 +501,9 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;;; activar variables para ver salida de problemas con tramp
 (setq tramp-debug-buffer t)
 (setq tramp-verbose 10)
+;;; otra forma más simple de acceder por ssh:
+;;; M-x ssh RET user@host -p XXXX RET
+(require 'ssh)
 ;
 ;;; Ajustar el prompt de eshell
 ;;; Modificar el prompt para mostrar el directorio de trabajo
