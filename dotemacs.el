@@ -1268,16 +1268,16 @@ y  nil si patch es un archivo"
 ;
 (defun ddg-search (text)
   "Buscar en firefox a partir de emacs un texto."
-  (interactive "sDDG: ")
+  (interactive "sUrl: ")
   (browse-url-firefox
    (concat "https://duckduckgo.com/?q="
 		              (replace-regexp-in-string " " "+" text))))
 ;
 (defun ddg-wikipedia (text)
-  "Search DuckDuckGo from Emacs."
-  (interactive "sWikipedia: ")
+  "Buscar en la Wikipedia-es un texto."
+  (interactive "sBuscar en la Wikipedia: ")
   (browse-url-firefox
-   (concat "https://duckduckgo.com/?q=!wikipedia+"
+   (concat "https://duckduckgo.com/?q=!wikipedia-es+"
                       (replace-regexp-in-string " " "+" text))))
 ;
 ;;;;;;;;;;;;;;;; end file .emacs ;;;;;;;;;;;;;;;;;;;;;;;
