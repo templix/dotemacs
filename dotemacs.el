@@ -1244,6 +1244,10 @@ y  nil si patch es un archivo"
 ;;; Gestión de los repositorios de github (C-c C-g activa magit-status)
 ;;; c c (escribir commit) C-c C-c (commit) P P (push) F F (pull) l l (log)
 (require 'magit)
+;;; especificar directorios git que se muestran en el minibuffer a escoger
+;;; al pulsar C-c C-g (con C-u C-c C-g tambien deja escoger repositorio)
+(custom-set-variables
+ '(magit-repository-directories (quote ("~/dotemacs" "~/tractatus" "~/repositori"))))
 ;
 ;;; Si se pretende abrir un archivo que no existe nos pedirá confirmación para crearlo:
 ;(setq confirm-nonexistent-file-or-buffer t)
