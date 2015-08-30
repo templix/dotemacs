@@ -203,6 +203,9 @@
 ;;; Activar indicador de bateria:
 ;(display-battery-mode 1)
 ;
+;;; Mostrar tamaño del archivo en la linea de estado:
+(size-indication-mode)
+;
 ;;; reloj con formato 24 horas
 ;;; Mostrar fecha y hora
 (setq display-time-day-and-date t
@@ -365,6 +368,8 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;;; persistan aunque cerremos emacs:
 ;(require 'scratch-persist)
 ;
+;;; Si queremos abrir un archivo o buffer inexistente que pida confirmación:
+(setq confirm-nonexistent-file-or-buffer t)
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;; Keys;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Comentar trozos de codigo:
