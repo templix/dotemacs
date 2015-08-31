@@ -1212,7 +1212,7 @@ y  nil si patch es un archivo"
 ;(setq twittering-use-master-password t)
 (add-hook 'twittering-mode-hook (lambda () (visual-line-mode 1)))
 ;
-;;; Feeds. Actualizar con M-x elfeed-update
+;;; Feeds. Actualizar con M-x elfeed-update o con G
 (setq elfeed-feeds
       '("http://www.genbeta.com/atom.xml"
 	"http://www.linux-party.com/backend.php"
