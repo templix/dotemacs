@@ -453,6 +453,8 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 (global-set-key "\C-x4" 'split-window-vertically-other-buffer)
 ;;; Abrir nueva ventana horizontal con un nuevo buffer
 (global-set-key "\C-x5" 'split-window-horizontally-other-buffer)
+;;; Revertir todos los buffers abiertos a sus respectivos archivos:
+(global-set-key (kbd "C-c B") 'revert-all-buffers)
 ;
 ;
 ;
@@ -1276,18 +1278,33 @@ y  nil si patch es un archivo"
     (find-file tramp-file-name)))
 ;
 (defun ddg-search (text)
-  "Buscar en firefox a partir de emacs un texto."
+  "Buscar en firefox con DuckDuckGoa partir de emacs un texto."
   (interactive "sUrl: ")
   (browse-url-firefox
    (concat "https://duckduckgo.com/?q="
 		              (replace-regexp-in-string " " "+" text))))
 ;
 (defun ddg-wikipedia (text)
-  "Buscar en la Wikipedia-es un texto."
-  (interactive "sBuscar en la Wikipedia: ")
+  "Buscar en firefox con DuckDuckGo en la wikipedia"
+  (interactive "sCercar a Wikipedia: ")
   (browse-url-firefox
    (concat "https://duckduckgo.com/?q=!wikipedia-es+"
-                      (replace-regexp-in-string " " "+" text))))
+		   (replace-regexp-in-string " " "+" text))))
+;
+(defun revert-all-buffers ()
+  "Revertir todos los buffers abiertos a sus respectivos archivos"
+  (interactive)
+  (let* ((list (buffer-list))
+		 (buffer (car list)))
+	(while buffer
+	  (when (buffer-file-name buffer)
+		(progn
+		  (set-buffer buffer)
+		  (revert-buffer t t t)))
+	  (setq list (cdr list))
+	  (setq buffer (car list))))
+  (message "Todos los archivos actualizados"))
+;
 ;
 ;;;;;;;;;;;;;;;; end file .emacs ;;;;;;;;;;;;;;;;;;;;;;;
 ;
