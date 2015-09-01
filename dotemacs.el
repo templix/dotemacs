@@ -371,6 +371,9 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;;; Si queremos abrir un archivo o buffer inexistente que pida confirmación:
 (setq confirm-nonexistent-file-or-buffer t)
 ;
+;;; No mostrar el puntero del mouse:
+(setq make-pointer-invisible t)
+;
 ;;;;;;;;;;;;;;;;;;;;;;;;; Keys;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Comentar trozos de codigo:
 (global-set-key (kbd "C-c c") 'comment-region)
