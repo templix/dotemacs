@@ -1223,8 +1223,21 @@ y  nil si patch es un archivo"
 	"http://feeds.feedburner.com/Command-line-fu"
 	; más feeds
 	"http://systemadmin.es/feed"))
-;;; que se actualicen cada 30 minutos:
-;(setf url-queue-timeout 30)
+;;; modificando algunos colores:
+(custom-set-faces
+ '(elfeed-search-date-face ((t (:background "black" :foreground "white"))))
+ '(elfeed-search-date-format (quote ("%d-%m-%Y" 10 :left)))
+ '(elfeed-search-feed-face ((t (:background "black" :foreground "white"))))
+ '(elfeed-search-title-face ((t (:background "black" :foreground "white")))))
+;;; aumentar el espació para los titulares. Por defecto 70
+(custom-set-variables
+  '(elfeed-search-title-max-width 120))
+;;; Aguardar respuesta del host 30 segundos:
+(setf url-queue-timeout 30)
+;;; Actualizar cada media hora y mostrar un mensaje:
+;(run-with-timer 0 3600 'elfeed-update)
+;(defun elfeed-update ()
+;    (message "Actualizadas noticias..."))
 ;
 (defun delete-buffer-and-file ()
   "Eliminar el presente archivo y el buffer correspondiente."
