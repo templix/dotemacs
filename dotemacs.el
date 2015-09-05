@@ -142,7 +142,7 @@
     (normal-top-level-add-subdirs-to-load-path))
 ;
 ;;; Leer tambien el archivo de configuración:
-(load "~/.gnu-emacs")
+;(load "~/.gnu-emacs")
 ;
 ;;; Si tenemos un archivo sensible (contraseñas, códigos...) podemos
 ;;; ocultarlo del archivo de configuración. Las siguientes lineas
