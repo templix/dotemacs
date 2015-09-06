@@ -1087,6 +1087,20 @@ y  nil si patch es un archivo"
     (concat "/sudo::"
             (expand-file-name file)))))
 ;
+(defun sudo ()
+  "Reabrir el presente archivo con sudo."
+  (interactive)
+  (when buffer-file-name
+	(find-alternate-file
+	 (concat "/sudo:root@localhost:" buffer-file-name))))
+;
+(defun su ()
+  "Reabrir el presente archivo como root."
+  (interactive)
+  (when buffer-file-name
+	(find-alternate-file
+	      (concat "/su::" buffer-file-name))))
+;
 (defun abrir-buffer-con-firefox()
   (interactive)
   (let ((filename (buffer-file-name)))
