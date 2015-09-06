@@ -38,13 +38,14 @@
 ;;; (http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el)
 ;;; Paquetes listos para instalar (tipo apt-get). M-x package-list-packages (update) M-x list-packages (listar)
 ;;; Para activar el modo: M-x package-menu-mode
-(require 'package)
+
+(require 'cl)
 (package-initialize)
+
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
-(require 'cl)
-;
+
 (defvar my-packages
 ; Listado de paquetes con C-h v package-activated-list
   '(anti-zenburn-theme
@@ -56,13 +57,12 @@
     chess
     color-theme
     color-theme-buffer-local
-    browser-at-remote
     dash
     dired-details
     elfeed
     elfeed-web
     emms
-    ss
+    ess
     git-commit
     gntp
     google-this
@@ -76,8 +76,8 @@
     insert-shebang
     latex-extra
     latex-preview-pane
-    magit
-    magit-popup
+    ;magit ;precisa git >= 1.9.4
+    ;magit-popup
     markdown-mode
     metaweblog
     muse
@@ -106,6 +106,20 @@
     zone-matrix
     )
     "Listado de paquetes que han de estar instalados o en caso negativo los instala.")
+
+(defun my-packages-installed-p ()
+  (loop for p in my-packages
+        when (not (package-installed-p p)) do (return nil)
+        finally (return t)))
+
+(unless (my-packages-installed-p)
+  ;; chequear nuevos paquetes (package versions)
+  (package-refresh-contents)
+  ;; Instalar paquetes inexistentes
+  (dolist (p my-packages)
+    (when (not (package-installed-p p))
+      (package-install p))))
+;
 ;
 ;;; Mostrar un mensaje de bienvenida en el minibuffer
 ;(defun display-startup-echo-area-message ()
@@ -342,9 +356,11 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 (require 'runner)
 ;
 ;;; Abrir en el navegador github o bitbucket con M-x browse-at-remote
+;;; descarga de: https://github.com/rmuslimov/browse-at-remote
+;;; y añadir al directorio .emacs.d/elpa/ (Luego descomentar el "require")
 ;;; La primera vez, entrar en el directorio y lanzar:
 ;;; git config --add browseAtRemote.type "github"
-(require 'browse-at-remote)
+;(require 'browse-at-remote)
 ;
 ;;; Convertir textos a html.
 (require 'htmlize)
@@ -1261,11 +1277,11 @@ y  nil si patch es un archivo"
 ;
 ;;; Gestión de los repositorios de github (C-c C-g activa magit-status)
 ;;; c c (escribir commit) C-c C-c (commit) P P (push) F F (pull) l l (log)
-(require 'magit)
+;(require 'magit)
 ;;; especificar directorios git que se muestran en el minibuffer a escoger
 ;;; al pulsar C-c C-g (con C-u C-c C-g tambien deja escoger repositorio)
-(custom-set-variables
- '(magit-repository-directories (quote ("~/repositorio1" "~/repositorio2" "~/repositorio3"))))
+;(custom-set-variables
+; '(magit-repository-directories (quote ("~/repositorio1" "~/repositorio2" "~/repositorio3"))))
 ;
 ;;; Si se pretende abrir un archivo que no existe nos pedirá confirmación para crearlo:
 ;(setq confirm-nonexistent-file-or-buffer t)
