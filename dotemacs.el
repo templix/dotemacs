@@ -1271,8 +1271,8 @@ y  nil si patch es un archivo"
 ;
 (defun delete-buffer-and-file ()
   "Eliminar el presente archivo y el buffer correspondiente."
-  (Interactive)
-  (Let ((filename (buffer-file-name))
+  (interactive)
+  (let ((filename (buffer-file-name))
 	(buffer (current-buffer))
 	(name (buffer-name)))
     (if (not (and filename (file-exists-p filename)))
