@@ -353,6 +353,9 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;;; En dired, asociar extensiones a determinadas aplicaciones.
 ;;; M-x runner-add-extension (C-c C-c para guardar la asociación))
 (require 'runner)
+;; actualización automática en dired sin mostrar salida
+(setq global-auto-revert-non-file-buffers t)
+(setq auto-revert-verbose nil)
 ;
 ;;; Abrir en el navegador github o bitbucket con M-x browse-at-remote
 ;;; descarga de: https://github.com/rmuslimov/browse-at-remote
