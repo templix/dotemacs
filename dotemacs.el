@@ -1352,6 +1352,11 @@ y  nil si patch es un archivo"
 	  (setq buffer (car list))))
   (message "Todos los archivos actualizados"))
 ;
+(defun limpiar-eshell ()
+  "Limpiar el buffer de la eshell."
+  (interactive)
+  (let ((inhibit-read-only t))
+	    (erase-buffer)))
 ;
 ;;;;;;;;;;;;;;;; end file .emacs ;;;;;;;;;;;;;;;;;;;;;;;
 ;
