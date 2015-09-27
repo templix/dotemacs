@@ -54,7 +54,6 @@
     auto-complete
     auto-complete-auctex
     center-text
-    chess
     color-theme
     color-theme-buffer-local
     dash
