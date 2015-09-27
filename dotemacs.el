@@ -903,9 +903,11 @@ abrirlos de forma rápida.")
   (message "Ruta del archivo copiada."))
 ;
 ;;; Función para pasar buffer a ps:
-(require 'ps-print nil t)
+(require 'ps-prin)
 (setq
  ps-paper-type 'a4
+; ps-font-size 7.0 ; por defecto 8.5 points
+ ps-number-of-columns 1 ; número de columnas
  ps-print-header nil;Sin encabezado
  )
 (defun ps-print-in-file (filename)
