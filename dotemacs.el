@@ -1,4 +1,4 @@
-;;                   __  _ __ ___   __ _  ___ ___
+>;;                   __  _ __ ___   __ _  ___ ___
 ;;                  / _ \ '_ ` _ \ / _` |/ __/ __|
 ;;                 |  __/ | | | | | (_| | (__\__ \
 ;;                (_)___|_| |_| |_|\__,_|\___|___/
@@ -1360,6 +1360,28 @@ y  nil si patch es un archivo"
   (interactive)
   (let ((inhibit-read-only t))
 	    (erase-buffer)))
+;
+(defun shell-current-directory (&optional arg)
+  "Abrir consola en el directorio del presente buffer"
+  (interactive "P")
+  (let* ((sp (get-process "shell"))
+         (spbuf (and sp (process-buffer sp)))
+         (dir (if buffer-file-name (file-name-directory buffer-file-name) default-directory)))
+    (if (and sp spbuf dir)
+        (progn
+          (when arg
+            (comint-simple-send sp (concat "cd /d " dir))
+            (save-excursion
+              (set-buffer spbuf)
+              (cd dir)
+              )
+            )
+          (display-buffer spbuf)
+          )
+      (progn
+        (shell)
+        (comint-simple-send sp "setlocal enableextensions")
+        ))))
 ;
 ;;;;;;;;;;;;;;;; end file .emacs ;;;;;;;;;;;;;;;;;;;;;;;
 ;
