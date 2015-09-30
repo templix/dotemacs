@@ -396,6 +396,8 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 (require 'undo-tree)
 (global-undo-tree-mode 1)
 ;
+;;; No truncar palabras al final de la linea:
+(setq-default truncate-lines t)
 ;
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;; Keys;;;;;;;;;;;;;;;;;;;;;;;;;
