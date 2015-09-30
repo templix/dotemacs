@@ -392,6 +392,12 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;;; No mostrar el puntero del mouse:
 (setq make-pointer-invisible t)
 ;
+;;; arbol para deshacer acciones:
+(require 'undo-tree)
+(global-undo-tree-mode 1)
+;
+;
+;
 ;;;;;;;;;;;;;;;;;;;;;;;;; Keys;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Comentar trozos de codigo:
 (global-set-key (kbd "C-c c") 'comment-region)
