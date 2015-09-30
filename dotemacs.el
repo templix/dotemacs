@@ -1391,5 +1391,11 @@ y  nil si patch es un archivo"
         (comint-simple-send sp "setlocal enableextensions")
         ))))
 ;
+(defun open-buffer-path ()
+  "Abrir con el navegador de archivos por defecto el directorio del presente buffer."
+  (interactive)
+  (shell-command (concat "xdg-open "
+                          (expand-file-name default-directory))))
+;
 ;;;;;;;;;;;;;;;; end file .emacs ;;;;;;;;;;;;;;;;;;;;;;;
 ;
