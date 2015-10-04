@@ -134,6 +134,9 @@
 ;;; Iluminar los parentesis y las llaves por parejas:
 (show-paren-mode 1)
 ;
+;;; Sustituir la región activa con tan sólo escribir texto o eliminarla pulsando "DEL":
+(delete-selection-mode 1)
+;
 ;;; Restablecer la posición del cursor al reabrir un archivo
 ;;; y activarlo para todos los buffers
 (setq save-place-file "~/.emacs.d/saved-places")
