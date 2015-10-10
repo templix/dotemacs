@@ -895,7 +895,7 @@ abrirlos de forma rápida.")
     ))
 ;
 ;;; Copiar la ruta del archivo del presente buffer (Pegarla con C-x y):
-(defun copy-file-path (&optional φdir-path-only-p)
+(defun copy-file-path (&optional dir-path-only-p)
   "Copiar la ruta del archivo del presente buffer (Pegarla con C-x y)"
   (interactive "P")
   (let ((fPath
@@ -903,7 +903,7 @@ abrirlos de forma rápida.")
              default-directory
            (buffer-file-name))))
     (kill-new
-     (if (equal φdir-path-only-p nil)
+     (if (equal dir-path-only-p nil)
          fPath
        (file-name-directory fPath))))
   (message "Ruta del archivo copiada."))
