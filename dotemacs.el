@@ -1,4 +1,4 @@
->;;                   __  _ __ ___   __ _  ___ ___
+;;                   __  _ __ ___   __ _  ___ ___
 ;;                  / _ \ '_ ` _ \ / _` |/ __/ __|
 ;;                 |  __/ | | | | | (_| | (__\__ \
 ;;                (_)___|_| |_| |_|\__,_|\___|___/
@@ -915,8 +915,13 @@ abrirlos de forma rápida.")
   (kill-new buffer-file-name t)
   (message "Ruta del archivo copiada."))
 ;
+(defun ruta ()
+  "Mostrar en el minibuffer el path del presente buffer"
+  (interactive)
+    (message (buffer-file-name) ))
+;
 ;;; Función para pasar buffer a ps:
-(require 'ps-prin)
+(require 'ps-print)
 (setq
  ps-paper-type 'a4
 ; ps-font-size 7.0 ; por defecto 8.5 points
