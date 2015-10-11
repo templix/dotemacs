@@ -793,7 +793,6 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 "\\usepackage{geometry}\n"
 "\\usepackage{url}\n"
 "\\usepackage[spanish]{babel}\n"
-"\\usepackage{html,makeidx}"
 "\\usepackage[T1]{fontenc}\n"
 "\\usepackage{textcomp}\n"
 "\\usepackage[utf8]{inputenc}\n"
