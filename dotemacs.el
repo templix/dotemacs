@@ -1404,5 +1404,12 @@ y  nil si patch es un archivo"
   (shell-command (concat "xdg-open "
                           (expand-file-name default-directory))))
 ;
+(defun my-find-file ()
+  "Modificar el path del directorio de busqueda de archivos:"
+  (interactive)
+  (let ((default-directory "~/Documentos"))
+        (call-interactively 'find-file)))
+(global-set-key (kbd "C-x C-f") 'my-find-file)
+;
 ;;;;;;;;;;;;;;;; end file .emacs ;;;;;;;;;;;;;;;;;;;;;;;
 ;
