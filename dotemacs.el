@@ -1427,18 +1427,19 @@ y  nil si patch es un archivo"
 ;  (interactive "Find Name (file name wildcard): ")
 ;    (find-name-dired my-dired-default-dir pattern))
 ;
-(defun clean-buffers ()
-  "Mata a todos los buffers no modificados y algunos superfluos (Help, output ...)"
-  (interactive)
-  (let ((list (buffer-list)))
-    (while list
-      (save-excursion
-        (let ((buffer (set-buffer (car list))))
-          (if (or (not (buffer-modified-p))
-                  (eq major-mode 'dired-mode)
-                  (string-match "\\*Help\\*\\|\\*Shell Command Output\\*" (buffer-name)))
-              (kill-buffer buffer))))
-            (setq list (cdr list)))))
+;; (defun clean-buffers ()
+;;   "Mata a todos los buffers no modificados y algunos superfluos (Help, output ...)"
+;;   (interactive)
+;;   (let ((list (buffer-list)))
+;;     (while list
+;;       (save-excursion
+;;         (let ((buffer (set-buffer (car list))))
+;;           (if (or (not (buffer-modified-p))
+;;                   (eq major-mode 'dired-mode)
+;;                   (string-match "\\*Help\\*\\|\\*Shell Command Output\\*" (buffer-name)))
+;;               (kill-buffer buffer))))
+;;             (setq list (cdr list)))))
+;
 ;
 ;;;;;;;;;;;;;;;; end file .emacs ;;;;;;;;;;;;;;;;;;;;;;;
 ;
