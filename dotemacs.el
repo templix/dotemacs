@@ -442,8 +442,8 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 (global-set-key (kbd "C-c y") 'plantilla)
 ;;; skeleton logo:
 (global-set-key (kbd "C-c l") 'logo)
-;;; Abre listado de archivos o directorios de forma rápida:
-(global-set-key (kbd "C-c x") 'open)
+;;; Mata todos los buffers que cumplan una condición:
+(global-set-key (kbd "C-c x") 'kill-matching-buffers)
 ;;; Crear backup del buffer actual:
 (global-set-key (kbd "C-c v")'make-backup)
 ;;; Imprimir buffer a pdf con C-c p
@@ -516,7 +516,7 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;;; Ignorar determinados buffers para que no salgan al pulsar C-x b
 (setq ido-ignore-buffers '("^ " "*Completions*" "*Shell Command Output*"
                            "*Messages*" "Async Shell Command" "*scratch*"
-                           "*tramp*"))
+                           "*tramp*" "*magit*"))
 ;;; Prioridad al mostrar determinadas extensiones:
 (setq ido-file-extensions-order '(".emacs" ".sh" ".txt" ".el" ".tex" ))
 ;;; Ver el listado vertical cuando se pulsa C-x b
