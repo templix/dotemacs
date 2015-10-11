@@ -1440,6 +1440,13 @@ y  nil si patch es un archivo"
 ;;               (kill-buffer buffer))))
 ;;             (setq list (cdr list)))))
 ;
+(defun indent-whole-buffer()
+  "Indentar todo el buffer"
+  (interactive)
+  (delete-trailing-whitespace)
+  (indent-region (point-min) (point-max) nil)
+  (untabify (point-min) (point-max))
+  )
 ;
 ;;;;;;;;;;;;;;;; end file .emacs ;;;;;;;;;;;;;;;;;;;;;;;
 ;
