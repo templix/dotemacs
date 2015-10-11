@@ -1428,7 +1428,7 @@ y  nil si patch es un archivo"
 ;    (find-name-dired my-dired-default-dir pattern))
 ;
 ;; (defun clean-buffers ()
-;;   "Mata a todos los buffers no modificados y algunos superfluos (Help, output ...)"
+;;   "Mata todos los buffers sin modificaciones pendientes de guardar y algunos superfluos (Help, output ...)"
 ;;   (interactive)
 ;;   (let ((list (buffer-list)))
 ;;     (while list
