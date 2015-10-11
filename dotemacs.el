@@ -1405,11 +1405,17 @@ y  nil si patch es un archivo"
                           (expand-file-name default-directory))))
 ;
 (defun my-find-file ()
-  "Modificar el path del directorio de busqueda de archivos:"
+  "Modificar el path del directorio de busqueda de archivos"
   (interactive)
   (let ((default-directory "~/Documentos"))
         (call-interactively 'find-file)))
 (global-set-key (kbd "C-x C-f") 'my-find-file)
 ;
+;;; Otra opción para el mismo fin:
+(setq my-dired-default-dir "~/Documentos")
+(defun my-find-name-dired (pattern)
+  "Modificar el path del directorio de busqueda de archivos"
+  (interactive "Find Name (file name wildcard): ")
+    (find-name-dired my-dired-default-dir pattern))
 ;;;;;;;;;;;;;;;; end file .emacs ;;;;;;;;;;;;;;;;;;;;;;;
 ;
