@@ -849,23 +849,32 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;
 ;;; Abrir archivos o directorios de forma rápida (C-c x) M-x open.
 ;(require 'ido)
-(defvar filelist nil "Lista de archivos o directorios que permite
-abrirlos de forma rápida.")
-(setq filelist
-      '(
-        ("telegram" . "~/.telegram-cli/downloads" )
-        ("backups" . "/media/DADES/dades/arxius_importants/" )
-        ("tractatus" . "~/tractatus/tractatus.txt" )
-        ;; Más entradas ...
-        ) )
+;; (defvar filelist nil "Lista de archivos o directorios que permite
+;; abrirlos de forma rápida.")
+;; (setq filelist
+;;       '(
+;;         ("telegram" . "~/.telegram-cli/downloads" )
+;;         ("backups" . "/media/DADES/dades/arxius_importants/" )
+;;         ("tractatus" . "~/tractatus/tractatus.txt" )
+;;         ;; Más entradas ...
+;;         ) )
+;; (defun open (openCode)
+;;   "Función para abrir el archivo o directorio predefinido"
+;;   (interactive
+;;    (list (ido-completing-read "Open:" (mapcar (lambda (x) (car x))
+;; 					      filelist)))
+;;    )
+;;   (find-file (cdr (assoc openCode xah-filelist))))
 ;
-(defun open (openCode)
-  "Función para abrir el archivo o directorio predefinido"
-  (interactive
-   (list (ido-completing-read "Open:" (mapcar (lambda (x) (car x))
-					      filelist)))
-   )
-  (find-file (cdr (assoc openCode xah-filelist))))
+;;; Lo mismo quie el anterior de otra forma:
+(defhydra hydra-dired (:exit t)
+  "directori"
+  ("s" (dired "~/spideroak/1-BUTA") "spideroak")
+  ("d" (dired "~/Documents") "Documents")
+  ("t" (dired "~/.telegram-cli/downloads") "telegram")
+  ("e" (dired "~/dotemacs/dotemacs.el") "dotemacs.el")
+  ("a" (dired "/media/DADES/dades/arxius_importants/") "arxius_importants"))
+(global-set-key (kbd "C-c C-r") 'hydra-dired/body)
 ;
 ;;; Otra forma de acceder a determinados archivos.
 ;;; Pulsando "C-x r j" y la letra que indica después del interrogante
