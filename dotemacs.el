@@ -1456,6 +1456,12 @@ y  nil si patch es un archivo"
   (untabify (point-min) (point-max))
   )
 ;
+(defun reiniciar ()
+  "Reiniciar el sistema"
+  (interactive)
+    (shell-command (concat "echo " (shell-quote-argument (read-passwd "Password? "))
+                       " | sudo -S init 6")))
+;
 (defun uname ()
   "Define nombre sistema, distro, kernel, arquitect ura..."
   (interactive)
