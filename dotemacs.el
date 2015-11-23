@@ -1452,5 +1452,17 @@ y  nil si patch es un archivo"
   (untabify (point-min) (point-max))
   )
 ;
+(defun uname ()
+  "Define nombre sistema, distro, kernel, arquitect ura..."
+  (interactive)
+  (if (eq system-type 'gnu/linux)
+    (shell-command "uname -a")))
+;
+(defun sudo-shell-command (command)
+  "Ejecutar un comando con sudo"
+  (interactive "MShell command (root): ")
+  (with-temp-buffer
+    (cd "/sudo::/")
+        (async-shell-command command)))
 ;;;;;;;;;;;;;;;; end file .emacs ;;;;;;;;;;;;;;;;;;;;;;;
 ;
