@@ -740,6 +740,10 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;(global-set-key "{" 'skeleton-pair-insert-maybe)
 ;(global-set-key "'" 'skeleton-pair-insert-maybe)
 ;
+;;; presentaciones. Seguir tuto de:
+;;; http://elbinario.net/2015/11/13/hacer-presentacions-super-molonas-con-efectos-3d-con-reveal-y-org-mode/
+(setq org-reveal-root "file:///opt/reveal.js")
+(require 'ox-reveal)
 ;
 ;;; Plantilla logo ;;;;;;;;;;;;;;;;
 (define-skeleton logo
