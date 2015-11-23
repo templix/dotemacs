@@ -402,6 +402,10 @@ calendar-month-name-array ["Gener" "Febrer" "Març" "Abril" "Maig" "Juny" "Julio
 ;;; No truncar palabras al final de la linea:
 (setq-default truncate-lines t)
 ;
+;;; Si queremos abrir al inicio de emacs la agenda, el calendario o una shell:
+;(add-hook 'emacs-startup-hook #'org-agenda-list)
+;(add-hook 'emacs-startup-hook #'calendar)
+;(add-hook 'emacs-startup-hook #'eshell)
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;; Keys;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Comentar trozos de codigo:
